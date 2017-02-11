@@ -24,9 +24,9 @@ public class ParserService {
 			try {
 				String url = String.format("https://public-api.nazk.gov.ua/v1/declaration/?page=%d", page);
 				Response response = mapper.readValue(new URL(url), Response.class);
-				for(StagingDeclaration dec: response.getItems()){
-				saveStagingDeclaration(dec);
-				System.out.println("id:"+ dec.getId() + "wsa saved");
+				for (StagingDeclaration dec : response.getItems()) {
+					saveStagingDeclaration(dec);
+					System.out.println("id:" + dec.getId() + "wsa saved");
 				}
 
 				if (response.page.totalItems < (response.page.currentPage * response.page.batchSize)) {
@@ -46,7 +46,7 @@ public class ParserService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		dataSource.setUrl("jdbc:mysql://sb-db01.softbistro.online/declaration?useSSL=false&useUnicode=yes&characterEncoding=UTF-8");
+		dataSource.setUrl("jdbc:mysql://sb-db01.softbistro.online/declaration?useUnicode=yes&characterEncoding=UTF-8");
 		dataSource.setUsername("root");
 		dataSource.setPassword("rotrotrot");
 
