@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Repository;
 
+import com.mysql.jdbc.Driver;
+
 /**
  * Geting information from database
  * 
@@ -23,6 +25,10 @@ public class JparserDao {
 	 * Get 400 records from DB with Id Declarations
 	 */
 	private static final String SQL_GET_LIST_ID_DECLARATIONS = "SELECT declaration_id FROM stagingDeclaration LIMIT 400 OFFSET ?";
+
+	/**
+	 * Update status in database
+	 */
 	private static final String SQL_UPDATE_VALUE_STATUS = "UPDATE stagingDeclaration SET status = ? WHERE status = ? LIMIT 400 ";
 
 	/**
@@ -40,13 +46,14 @@ public class JparserDao {
 
 		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 		try {
-			dataSource.setDriver(new com.mysql.jdbc.Driver());
+			dataSource.setDriver(new Driver());
+			dataSource.setUrl(
+					"jdbc:mysql://sb-db01.softbistro.online/declaration?useUnicode=yes&characterEncoding=UTF-8");
+			dataSource.setUsername("root");
+			dataSource.setPassword("rotrotrot");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		dataSource.setUrl("jdbc:mysql://sb-db01.softbistro.online/declaration?useUnicode=yes&characterEncoding=UTF-8");
-		dataSource.setUsername("root");
-		dataSource.setPassword("rotrotrot");
 		return dataSource;
 	}
 
@@ -60,9 +67,7 @@ public class JparserDao {
 
 		@Override
 		public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-
 			String declarationId = rs.getString(1);
-
 			return declarationId;
 		}
 	}
