@@ -1,25 +1,69 @@
 package com.softbistro.declarations.jparser.component.entity;
 
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CashAssets {
 	private int id;
-	private int personId;
-	private Rights rights;
+
+	@JsonProperty("person")
+	private String personId;
+
+	@JsonProperty("rights")
+	private Map<String, Rights> rights;
+
+	@JsonProperty("objectType")
 	private String objectType;
+
+	@JsonProperty("sizeAssets")
 	private double sizeAssets;
+
+	@JsonProperty("organization")
 	private String organization;
+
+	@JsonProperty("assetsCurrency")
 	private String assetsCurrency;
+
+	@JsonProperty("otherObjectType")
 	private String otherObjectType;
+
+	@JsonProperty("organization_type")
 	private String organizationType;
+
+	@JsonProperty("debtor_ua_lastname")
 	private String deptorUaLastName;
+
+	@JsonProperty("debtor_eng_lastname")
 	private String deptorEngLastName;
+
+	@JsonProperty("debtor_ua_firstname")
 	private String deptorUaFirstName;
+
+	@JsonProperty("debtor_ukr_lastname")
 	private String deptorUkrLastName;
+
+	@JsonProperty("debtor_eng_firstname")
 	private String deptorEngFirstName;
+
+	@JsonProperty("debtor_ua_middlename")
 	private String deptorUaMiddleName;
+
+	@JsonProperty("debtor_ukr_firstname")
 	private String deptorUkrFirstName;
+
+	@JsonProperty("debtor_eng_middlename")
 	private String deptorEngMiddleName;
+
+	@JsonProperty("debtor_ukr_middlename")
 	private String deptorUkrMiddleName;
+
+	@JsonProperty("organization_ua_company_name")
 	private String organizationUaCompanyName;
+
+	@JsonProperty("organization_eng_company_name")
 	private String organizationEngCompanyName;
 
 	public int getId() {
@@ -28,22 +72,6 @@ public class CashAssets {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getPersonId() {
-		return personId;
-	}
-
-	public void setPersonId(int personId) {
-		this.personId = personId;
-	}
-
-	public Rights getRights() {
-		return rights;
-	}
-
-	public void setRights(Rights rights) {
-		this.rights = rights;
 	}
 
 	public String getObjectType() {
@@ -180,6 +208,22 @@ public class CashAssets {
 
 	public void setOrganizationEngCompanyName(String organizationEngCompanyName) {
 		this.organizationEngCompanyName = organizationEngCompanyName;
+	}
+
+	public String getPersonId() {
+		return personId;
+	}
+
+	public void setPersonId(String personId) {
+		this.personId = personId;
+	}
+
+	public Map<String, Rights> getRights() {
+		return rights;
+	}
+
+	public void setRights(Map<String, Rights> rights) {
+		this.rights = rights;
 	}
 
 }

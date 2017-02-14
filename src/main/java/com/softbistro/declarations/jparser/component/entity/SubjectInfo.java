@@ -1,21 +1,57 @@
 package com.softbistro.declarations.jparser.component.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SubjectInfo {
+
+	@JsonProperty("country")
 	private String country;
+
+	@JsonProperty("lastname")
 	private String lastName;
+
+	@JsonProperty("postType")
 	private String postType;
+
+	@JsonProperty("workPost")
 	private String workPost;
+
+	@JsonProperty("firstname")
 	private String firstName;
+
+	@JsonProperty("workPlace")
 	private String workPlase;
+
+	@JsonProperty("middlename")
 	private String middleName;
+
+	@JsonProperty("changedName")
 	private boolean changedName;
+
+	@JsonProperty("countryPath")
 	private String countryPath;
+
+	@JsonProperty("postCategory")
 	private String postCategory;
+
+	@JsonProperty("previous_lastname")
 	private String previousLastName;
+
+	@JsonProperty("corruptionAffected")
 	private String corruptionAffected;
+
+	@JsonProperty("previous_firstname")
 	private String previousFirstName;
+
+	@JsonProperty("previous_middlename")
 	private String previousMiddleName;
+
+	@JsonProperty("responsiblePosition")
 	private String responsiblePosition;
+
+	@JsonProperty("housePartNum_extendedstatus")
 	private String housePartNum;
 
 	public String getCountry() {

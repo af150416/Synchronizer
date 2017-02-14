@@ -1,62 +1,64 @@
 package com.softbistro.declarations.jparser.component.entity;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Realty {
-	private int id;
-	private List<Rights> rights;
-	private int country;
-	private double cost;
-	private double totalArea;
+
+	@JsonProperty("person")
+	private String personId;
+
+	@JsonProperty("rights")
+	private Map<String, Rights> rights;
+
+	@JsonProperty("country")
+	private Integer country;
+
+	@JsonProperty("costDate")
+	private String cost;
+
+	@JsonProperty("totalArea")
+	private String totalArea;
+
+	@JsonProperty("objectType")
 	private String objectType;
-	private Date gainDate;
+
+	@JsonProperty("owningDate")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
+	private Date owningDate;
+
+	@JsonProperty("ua_cityType")
 	private String cityType;
-	private int postCode;
+
+	@JsonProperty("ua_postCode")
+	private Integer postCode;
+
+	@JsonProperty("costAssessment")
 	private String costAssessment;
+
+	@JsonProperty("otherObjectType")
 	private String otherObjectTyope;
-	private int regNumberExtendedStatus;
-	private int costAssessmentExtendedStatus;
-	private int housePartNumExtendedStatus;
 
-	public int getId() {
-		return id;
-	}
+	@JsonProperty("regNumber_extendedstatus")
+	private Integer regNumberExtendedStatus;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	@JsonProperty("costAssessment_extendedstatus")
+	private Integer costAssessmentExtendedStatus;
 
-	public List<Rights> getRights() {
-		return rights;
-	}
+	@JsonProperty("ua_housePartNum_extendedstatus")
+	private Integer housePartNumExtendedStatus;
 
-	public void setRights(List<Rights> rights) {
-		this.rights = rights;
-	}
-
-	public int getCountry() {
+	public Integer getCountry() {
 		return country;
 	}
 
-	public void setCountry(int country) {
+	public void setCountry(Integer country) {
 		this.country = country;
-	}
-
-	public double getCost() {
-		return cost;
-	}
-
-	public void setCost(double cost) {
-		this.cost = cost;
-	}
-
-	public double getTotalArea() {
-		return totalArea;
-	}
-
-	public void setTotalArea(double totalArea) {
-		this.totalArea = totalArea;
 	}
 
 	public String getObjectType() {
@@ -68,11 +70,11 @@ public class Realty {
 	}
 
 	public Date getGainDate() {
-		return gainDate;
+		return owningDate;
 	}
 
 	public void setGainDate(Date gainDate) {
-		this.gainDate = gainDate;
+		this.owningDate = gainDate;
 	}
 
 	public String getCityType() {
@@ -83,11 +85,11 @@ public class Realty {
 		this.cityType = cityType;
 	}
 
-	public int getPostCode() {
+	public Integer getPostCode() {
 		return postCode;
 	}
 
-	public void setPostCode(int postCode) {
+	public void setPostCode(Integer postCode) {
 		this.postCode = postCode;
 	}
 
@@ -107,28 +109,60 @@ public class Realty {
 		this.otherObjectTyope = otherObjectTyope;
 	}
 
-	public int getRegNumberExtendedStatus() {
+	public Integer getRegNumberExtendedStatus() {
 		return regNumberExtendedStatus;
 	}
 
-	public void setRegNumberExtendedStatus(int regNumberExtendedStatus) {
+	public void setRegNumberExtendedStatus(Integer regNumberExtendedStatus) {
 		this.regNumberExtendedStatus = regNumberExtendedStatus;
 	}
 
-	public int getCostAssessmentExtendedStatus() {
+	public Integer getCostAssessmentExtendedStatus() {
 		return costAssessmentExtendedStatus;
 	}
 
-	public void setCostAssessmentExtendedStatus(int costAssessmentExtendedStatus) {
+	public void setCostAssessmentExtendedStatus(Integer costAssessmentExtendedStatus) {
 		this.costAssessmentExtendedStatus = costAssessmentExtendedStatus;
 	}
 
-	public int getHousePartNumExtendedStatus() {
+	public Integer getHousePartNumExtendedStatus() {
 		return housePartNumExtendedStatus;
 	}
 
-	public void setHousePartNumExtendedStatus(int housePartNumExtendedStatus) {
+	public void setHousePartNumExtendedStatus(Integer housePartNumExtendedStatus) {
 		this.housePartNumExtendedStatus = housePartNumExtendedStatus;
+	}
+
+	public Map<String, Rights> getRights() {
+		return rights;
+	}
+
+	public void setRights(Map<String, Rights> rights) {
+		this.rights = rights;
+	}
+
+	public String getPersonId() {
+		return personId;
+	}
+
+	public void setPersonId(String personId) {
+		this.personId = personId;
+	}
+
+	public String getTotalArea() {
+		return totalArea;
+	}
+
+	public void setTotalArea(String totalArea) {
+		this.totalArea = totalArea;
+	}
+
+	public String getCost() {
+		return cost;
+	}
+
+	public void setCost(String cost) {
+		this.cost = cost;
 	}
 
 }

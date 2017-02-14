@@ -1,21 +1,30 @@
 package com.softbistro.declarations.jparser.component.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
-public class Declaration {
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Declaration implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
+
+	@JsonProperty("created_date")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
 	private Date createdDate;
+
+	@JsonProperty("lastmodified_date")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
 	private Date lastModifiedDate;
-	private List<DeclarantData> declarantDatas;
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
+	@JsonProperty("data")
+	private DeclarantData declarantDatas;
 
 	public Date getCreatedDate() {
 		return createdDate;
@@ -33,11 +42,19 @@ public class Declaration {
 		this.lastModifiedDate = lastModifiedDate;
 	}
 
-	public List<DeclarantData> getDeclarantDatas() {
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public DeclarantData getDeclarantDatas() {
 		return declarantDatas;
 	}
 
-	public void setDeclarantDatas(List<DeclarantData> declarantDatas) {
+	public void setDeclarantDatas(DeclarantData declarantDatas) {
 		this.declarantDatas = declarantDatas;
 	}
 

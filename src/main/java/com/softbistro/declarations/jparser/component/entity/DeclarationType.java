@@ -1,8 +1,15 @@
 package com.softbistro.declarations.jparser.component.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class DeclarationType {
-	private int typeOfDeclaration;
-	private int yearOfDeclaration;
+	@JsonProperty("declarationType")
+	private Integer typeOfDeclaration;
+
+	@JsonProperty("declarationYear1")
+	private Integer yearOfDeclaration;
 
 	public int getTypeOfDeclaration() {
 		return typeOfDeclaration;

@@ -1,20 +1,48 @@
 package com.softbistro.declarations.jparser.component.entity;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Movable {
 	private int id;
-	private String barnd;
+
+	@JsonProperty("brand")
+	private String brand;
+
+	@JsonProperty("model")
 	private String model;
+
+	@JsonProperty("person")
 	private String person;
-	private List<Rights> rights;
+
+	@JsonProperty("rights")
+	private Map<String, Rights> rights;
+
+	@JsonProperty("costDate")
 	private double costDate;
+
+	@JsonProperty("objectType")
 	private String objectType;
+
+	@JsonProperty("owningDate")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
 	private Date owningDate;
+
+	@JsonProperty("typeProperty")
 	private String typeProperty;
+
+	@JsonProperty("graduationYear")
 	private int graduationYear;
+
+	@JsonProperty("otherTypeProperty")
 	private String otherTypeProperty;
+
+	@JsonProperty("costDate_extendedstatus")
 	private String costDateExtendedStatus;
 
 	public int getId() {
@@ -26,11 +54,11 @@ public class Movable {
 	}
 
 	public String getBarnd() {
-		return barnd;
+		return brand;
 	}
 
 	public void setBarnd(String barnd) {
-		this.barnd = barnd;
+		this.brand = barnd;
 	}
 
 	public String getModel() {
@@ -47,14 +75,6 @@ public class Movable {
 
 	public void setPerson(String person) {
 		this.person = person;
-	}
-
-	public List<Rights> getRights() {
-		return rights;
-	}
-
-	public void setRights(List<Rights> rights) {
-		this.rights = rights;
 	}
 
 	public double getCostDate() {
@@ -111,6 +131,14 @@ public class Movable {
 
 	public void setCostDateExtendedStatus(String costDateExtendedStatus) {
 		this.costDateExtendedStatus = costDateExtendedStatus;
+	}
+
+	public Map<String, Rights> getRights() {
+		return rights;
+	}
+
+	public void setRights(Map<String, Rights> rights) {
+		this.rights = rights;
 	}
 
 }

@@ -1,48 +1,74 @@
 package com.softbistro.declarations.jparser.component.entity;
 
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MoneyGifts {
-	private int id;
-	private int personId;
-	private Rights rights;
+	private Integer id;
+
+	@JsonProperty("person")
+	private String personId;
+
+	@JsonProperty("rights")
+	private Map<String, Rights> rights;
+
+	@JsonProperty("objectType")
 	private String objectType;
-	private int sizeIncome;
+
+	@JsonProperty("sizeIncome")
+	private double sizeIncome;
+
+	@JsonProperty("incomeSource")
 	private String incomeSource;
+
+	@JsonProperty("source_citizen")
 	private String sourceCitizen;
+
+	@JsonProperty("otherObjectType")
 	private String otherObjectType;
+
+	@JsonProperty("source_ua_lastname")
 	private String sourceUaLastName;
+
+	@JsonProperty("source_eng_lastname")
 	private String sourceEngLastName;
+
+	@JsonProperty("source_ua_firstname")
 	private String sourceUaFirstName;
+
+	@JsonProperty("source_ukr_lastname")
 	private String sourseUkrLastName;
+
+	@JsonProperty("source_eng_firstname")
 	private String sourseEngFirstName;
+
+	@JsonProperty("source_ua_middlename")
 	private String sourseUaMiddleName;
+
+	@JsonProperty("source_ukr_firstname")
 	private String sourseUkrFirstName;
+
+	@JsonProperty("source_eng_middlename")
 	private String sourseEngMiddleName;
+
+	@JsonProperty("source_ukr_middlename")
 	private String sourseUkrMiddleName;
+
+	@JsonProperty("source_ua_company_name")
 	private String sourseUaCompanyName;
+
+	@JsonProperty("source_eng_company_name")
 	private String sourseEngCompanyName;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public int getPersonId() {
-		return personId;
-	}
-
-	public void setPersonId(int personId) {
-		this.personId = personId;
-	}
-
-	public Rights getRights() {
-		return rights;
-	}
-
-	public void setRights(Rights rights) {
-		this.rights = rights;
 	}
 
 	public String getObjectType() {
@@ -51,14 +77,6 @@ public class MoneyGifts {
 
 	public void setObjectType(String objectType) {
 		this.objectType = objectType;
-	}
-
-	public int getSizeIncome() {
-		return sizeIncome;
-	}
-
-	public void setSizeIncome(int sizeIncome) {
-		this.sizeIncome = sizeIncome;
 	}
 
 	public String getIncomeSource() {
@@ -171,6 +189,30 @@ public class MoneyGifts {
 
 	public void setSourseEngCompanyName(String sourseEngCompanyName) {
 		this.sourseEngCompanyName = sourseEngCompanyName;
+	}
+
+	public String getPersonId() {
+		return personId;
+	}
+
+	public void setPersonId(String personId) {
+		this.personId = personId;
+	}
+
+	public Map<String, Rights> getRights() {
+		return rights;
+	}
+
+	public void setRights(Map<String, Rights> rights) {
+		this.rights = rights;
+	}
+
+	public double getSizeIncome() {
+		return sizeIncome;
+	}
+
+	public void setSizeIncome(double sizeIncome) {
+		this.sizeIncome = sizeIncome;
 	}
 
 }

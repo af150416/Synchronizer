@@ -1,24 +1,49 @@
 package com.softbistro.declarations.jparser.component.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SubjectFamily {
-	private int Id;
+
+	private Integer id;
+
+	@JsonProperty("lastname")
 	private String lastName;
+
+	@JsonProperty("firstname")
 	private String firstName;
+
+	@JsonProperty("middlename")
 	private String middleName;
+
+	@JsonProperty("changedName")
 	private boolean changedName;
+
+	@JsonProperty("eng_lastname")
 	private String engLastName;
+
+	@JsonProperty("eng_firstname")
 	private String engFirstName;
+
+	@JsonProperty("subjectRelation")
 	private String subjectRelation;
+
+	@JsonProperty("previous_lastname")
 	private String previousLastName;
+
+	@JsonProperty("previous_firstname")
 	private String previousFirstName;
+
+	@JsonProperty("previous_middlename")
 	private String previousMiddleName;
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getLastName() {

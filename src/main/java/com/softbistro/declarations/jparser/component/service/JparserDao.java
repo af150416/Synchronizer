@@ -5,9 +5,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.mysql.jdbc.Driver;
@@ -19,12 +21,16 @@ import com.mysql.jdbc.Driver;
  *
  */
 @Repository
+@Component
 public class JparserDao {
+	@Value("${count.of.records.for.list}")
+	private String str;
 
+	private int countOfRecords = 5; // properties.getProperty("countOfRecordsForList");
 	/**
 	 * Get 400 records from DB with Id Declarations
 	 */
-	private static final String SQL_GET_LIST_ID_DECLARATIONS = "SELECT declaration_id FROM stagingDeclaration LIMIT 400 OFFSET ?";
+	private static final String SQL_GET_LIST_ID_DECLARATIONS = "SELECT declaration_id FROM stagingDeclaration LIMIT ? OFFSET ?";
 
 	/**
 	 * Update status in database
@@ -77,20 +83,27 @@ public class JparserDao {
 	 * 
 	 * @param page
 	 */
-	public void getListIdDeclaration(int page) {
+	public List<String> getListIdDeclaration(int page) {
 		List<String> listIdDeclarations = new ArrayList<>();
-		page *= 400;
+		page *= countOfRecords;
 
 		String statusForChange = "new";
 		String statusWillBeChaged = "in progress";
 
-		listIdDeclarations = jdbcTemplate.query(SQL_GET_LIST_ID_DECLARATIONS, new WorkingWithData(), page);
-		jdbcTemplate.update(SQL_UPDATE_VALUE_STATUS, statusWillBeChaged, statusForChange);
+		listIdDeclarations = jdbcTemplate.query(SQL_GET_LIST_ID_DECLARATIONS, new WorkingWithData(), countOfRecords,
+				page);
+		// jdbcTemplate.update(SQL_UPDATE_VALUE_STATUS, statusWillBeChaged,
+		// statusForChange);
 
 		for (String show : listIdDeclarations) {
 			System.out.println("====================================================================");
 			System.out.println(String.format("============%s=======", show));
+
 		}
+
+		System.out.println(str);
+
+		return listIdDeclarations;
 
 	}
 

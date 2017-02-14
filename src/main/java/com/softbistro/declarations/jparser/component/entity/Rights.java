@@ -1,31 +1,60 @@
 package com.softbistro.declarations.jparser.component.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Rights {
-	private int id;
+
+	private String id;
+
+	@JsonProperty("citizen")
 	private String citizen;
+
+	@JsonProperty("ua_city")
 	private String uaCity;
+
+	@JsonProperty("ua_lastname")
 	private String uaLastName;
+
+	@JsonProperty("ua_postCode")
 	private String uaPostCode;
+
+	@JsonProperty("eng_lastname")
 	private String engLastName;
+
+	@JsonProperty("eng_postCode")
 	private String engPostCode;
-	private int rightBelongs;
+
+	@JsonProperty("rightBelongs")
+	private String rightBelongs;
+
+	@JsonProperty("ua_firstname")
 	private String uaFirstName;
+
+	@JsonProperty("ukr_lastname")
 	private String ukrLastName;
+
+	@JsonProperty("ownershipType")
 	private String ownerShipType;
+
+	@JsonProperty("ua_middlename")
 	private String uaMiddleName;
+
+	@JsonProperty("otherOwnership")
 	private String otherOwnerShip;
+
+	@JsonProperty("rights_cityPath")
 	private String rightsCityPath;
+
+	@JsonProperty("ua_company_name")
 	private String uaCompanyName;
+
+	@JsonProperty("eng_company_name")
 	private String engCompanyName;
-	private int percentOwnerShip;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	@JsonProperty("percent-ownership")
+	private String percentOwnerShip;
 
 	public String getCitizen() {
 		return citizen;
@@ -73,14 +102,6 @@ public class Rights {
 
 	public void setEngPostCode(String engPostCode) {
 		this.engPostCode = engPostCode;
-	}
-
-	public int getRightBelongs() {
-		return rightBelongs;
-	}
-
-	public void setRightBelongs(int rightBelongs) {
-		this.rightBelongs = rightBelongs;
 	}
 
 	public String getUaFirstName() {
@@ -147,11 +168,27 @@ public class Rights {
 		this.engCompanyName = engCompanyName;
 	}
 
-	public int getPercentOwnerShip() {
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getRightBelongs() {
+		return rightBelongs;
+	}
+
+	public void setRightBelongs(String rightBelongs) {
+		this.rightBelongs = rightBelongs;
+	}
+
+	public String getPercentOwnerShip() {
 		return percentOwnerShip;
 	}
 
-	public void setPercentOwnerShip(int percentOwnerShip) {
+	public void setPercentOwnerShip(String percentOwnerShip) {
 		this.percentOwnerShip = percentOwnerShip;
 	}
 
