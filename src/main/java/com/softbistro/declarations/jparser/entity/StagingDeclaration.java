@@ -7,75 +7,64 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name="stagingDeclaration")
 public class StagingDeclaration {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer uid;
+	private Integer id;
 	
-	@Column(name = "declaration_id")
-	private String id;
+	@JsonProperty("id")
+	private String declarationId;
 	
-	@Column(name = "first_name")
-	private String firstname;
+	@JsonProperty("firstname")
+	private String firstName;
 	
-	@Column(name = "last_name")
-	private String lastname;
+	@JsonProperty("lastname")
+	private String lastName;
 	
-	@Column(name = "work_place")
 	private String placeOfWork;
 	
-	@Column(name = "position")
 	private String position;
 	
-	@Column(name = "pdf_link")
-	private String linkPDF;
-	
-	@Column(name = "status")
+	@JsonProperty("linkPDF")
+	private String linkPdf;
+
 	private String status;
 	
-	public StagingDeclaration(){
-		
-	}
-
-	public StagingDeclaration(String id, String firstname, String lastname, String placeOfWork, String position,
-			String linkPDF) {
-		super();
-		this.id = id;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.placeOfWork = placeOfWork;
-		this.position = position;
-		this.linkPDF = linkPDF;
-		this.status = "new";
-	}
-	
-	
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public String getDeclarationId() {
+		return declarationId;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setDeclarationId(String declarationId) {
+		this.declarationId = declarationId;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getPlaceOfWork() {
@@ -94,12 +83,12 @@ public class StagingDeclaration {
 		this.position = position;
 	}
 
-	public String getLinkPDF() {
-		return linkPDF;
+	public String getLinkPdf() {
+		return linkPdf;
 	}
 
-	public void setLinkPDF(String linkPDF) {
-		this.linkPDF = linkPDF;
+	public void setLinkPdf(String linkPdf) {
+		this.linkPdf = linkPdf;
 	}
 
 	public String getStatus() {
@@ -112,7 +101,7 @@ public class StagingDeclaration {
 
 	@Override
 	public String toString(){
-		return new StringBuilder()+getLastname()+" "+getFirstname()+" "+getId();
+		return new StringBuilder()+getLastName()+" "+getFirstName()+" "+getDeclarationId();
 		
 	}
 }
