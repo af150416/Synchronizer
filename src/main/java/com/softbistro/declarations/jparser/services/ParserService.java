@@ -2,62 +2,61 @@ package com.softbistro.declarations.jparser.services;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softbistro.declarations.jparser.entity.Response;
-import com.softbistro.declarations.jparser.entity.StagingDeclaration;
 
+
+/**
+ * Parsing JSON with declaration
+ * 
+ * @author af150416
+ *
+ */
 @Service
 public class ParserService {
 
+	@Autowired
+	ParserDao writer;
+	
+	/**
+	 * URL to parsing declaration
+	 */
+	private final static String PARSED_URL = "https://public-api.nazk.gov.ua/v1/declaration/?page=";
+	
+	/**
+	 * Scheduling time in milliseconds
+	 */
+	private final static long SCHEDULED_RATE = 86400000l;
+	Logger LOGGER = Logger.getLogger(ParserService.class.getName());
+	
+	/**
+	 * Method to parsing declaration
+	 */
+	@Scheduled(fixedRate = SCHEDULED_RATE)
 	public void getStagingDeclaration() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-		for (int page = 439;; page++) {
+		boolean hasData = true;
+		for (int page = 1; hasData; page++) {
 			try {
-				String url = String.format("https://public-api.nazk.gov.ua/v1/declaration/?page=%d", page);
-				Response response = mapper.readValue(new URL(url), Response.class);
-				for(StagingDeclaration dec: response.getItems()){
-				saveStagingDeclaration(dec);
-				System.out.println("id:"+ dec.getId() + "wsa saved");
-				}
-
+				Response response = mapper.readValue(new URL(PARSED_URL + page), Response.class);
+				writer.saveListOfStagingDeclaration(response.getItems(), response.page.getCurrentPage());
 				if (response.page.totalItems < (response.page.currentPage * response.page.batchSize)) {
-					break;
+					hasData = false;
 				}
-
 			} catch (IOException e) {
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, e.toString(), e);
 			}
 		}
-	}
-
-	public void saveStagingDeclaration(StagingDeclaration dec) {
-		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-		try {
-			dataSource.setDriver(new com.mysql.jdbc.Driver());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		dataSource.setUrl("jdbc:mysql://sb-db01.softbistro.online/declaration?useSSL=false&useUnicode=yes&characterEncoding=UTF-8");
-		dataSource.setUsername("root");
-		dataSource.setPassword("rotrotrot");
-
-		JdbcTemplate jdbc = new JdbcTemplate(dataSource);
-		String sqlInsert = "INSERT INTO stagingDeclaration (declaration_id, first_name, last_name, work_place, position, pdf_link, status)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
-		try {
-			jdbc.update(sqlInsert, dec.getId(), new String(dec.getFirstname().getBytes(), "UTF-8"), dec.getLastname(),
-					dec.getPlaceOfWork(), dec.getPosition(), dec.getLinkPDF(), "new");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		LOGGER.log(Level.INFO, String.format(" <<< All pages was writing to Data Base >>> "));
 	}
 }
