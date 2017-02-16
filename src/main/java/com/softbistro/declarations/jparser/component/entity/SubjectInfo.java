@@ -12,6 +12,18 @@ public class SubjectInfo {
 	@JsonProperty("lastname")
 	private String lastName;
 
+	@JsonProperty("actual_city")
+	private String actualCity;
+
+	@JsonProperty("actual_district")
+	private String actualDistrict;
+
+	@JsonProperty("actual_region")
+	private String actualRegion;
+
+	@JsonProperty("actual_country")
+	private String actualCountry;
+
 	@JsonProperty("postType")
 	private String postType;
 
@@ -180,6 +192,38 @@ public class SubjectInfo {
 
 	public void setHousePartNum(String housePartNum) {
 		this.housePartNum = housePartNum;
+	}
+
+	public String getActualCity() {
+		return actualCity;
+	}
+
+	public void setActualCity(String actualCity) {
+		this.actualCity = actualCity;
+	}
+
+	public String getActualDistrict() {
+		return actualDistrict;
+	}
+
+	public void setActualDistrict(String actualDistrict) {
+		this.actualDistrict = actualDistrict;
+	}
+
+	public String getActualRegion() {
+		return actualRegion;
+	}
+
+	public void setActualRegion(String actualRegion) {
+		this.actualRegion = actualRegion;
+	}
+
+	public String getActualCountry() {
+		return actualCountry;
+	}
+
+	public void setActualCountry(String actualCountry) {
+		this.actualCountry = actualCountry;
 	}
 
 }

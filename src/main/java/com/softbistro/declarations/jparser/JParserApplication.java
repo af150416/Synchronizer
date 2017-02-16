@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -26,9 +25,13 @@ public class JParserApplication {
 		ApplicationContext context = SpringApplication.run(JParserApplication.class, args);
 		// ParserService parserService = context.getBean(ParserService.class);
 		// parserService.getStagingDeclaration();
+		JparserDao jparserDao = new JparserDao();
+
+		ParsingJson parsingJson = new ParsingJson();
+		parsingJson.getingInformationFromDeclaration(jparserDao.getListIdDeclaration(0));
 	}
 
-	@Scheduled(fixedDelay = 1000)
+	// @Scheduled(fixedDelay = 1500)
 	public void show() {
 
 		JparserDao jparserDao = new JparserDao();

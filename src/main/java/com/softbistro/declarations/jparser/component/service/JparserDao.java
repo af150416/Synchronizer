@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -23,19 +22,19 @@ import com.mysql.jdbc.Driver;
 @Repository
 @Component
 public class JparserDao {
-	@Value("${count.of.records.for.list}")
+	// @Value("${count.of.records.for.list}")
 	private String str;
 
-	private int countOfRecords = 5; // properties.getProperty("countOfRecordsForList");
+	private int countOfRecords = 100; // properties.getProperty("countOfRecordsForList");
 	/**
 	 * Get 400 records from DB with Id Declarations
 	 */
-	private static final String SQL_GET_LIST_ID_DECLARATIONS = "SELECT declaration_id FROM stagingDeclaration LIMIT ? OFFSET ?";
+	private static final String SQL_GET_LIST_ID_DECLARATIONS = "SELECT declaration_id FROM staging_declaration LIMIT ? OFFSET ?";
 
 	/**
 	 * Update status in database
 	 */
-	private static final String SQL_UPDATE_VALUE_STATUS = "UPDATE stagingDeclaration SET status = ? WHERE status = ? LIMIT 400 ";
+	private static final String SQL_UPDATE_VALUE_STATUS = "UPDATE staging_declaration SET status = ? WHERE status = ? LIMIT 400 ";
 
 	/**
 	 * Variable for working with database
@@ -94,14 +93,6 @@ public class JparserDao {
 				page);
 		// jdbcTemplate.update(SQL_UPDATE_VALUE_STATUS, statusWillBeChaged,
 		// statusForChange);
-
-		for (String show : listIdDeclarations) {
-			System.out.println("====================================================================");
-			System.out.println(String.format("============%s=======", show));
-
-		}
-
-		System.out.println(str);
 
 		return listIdDeclarations;
 

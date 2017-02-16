@@ -1,10 +1,17 @@
 package com.softbistro.declarations.jparser.component.entity;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class SubjectFamily {
+public class SubjectFamily implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 
@@ -37,6 +44,12 @@ public class SubjectFamily {
 
 	@JsonProperty("previous_middlename")
 	private String previousMiddleName;
+
+	@JsonProperty("citizenship")
+	private String citizenship;
+
+	@JsonProperty("relation_subject")
+	private String relationSubject;
 
 	public int getId() {
 		return id;
@@ -124,6 +137,22 @@ public class SubjectFamily {
 
 	public void setPreviousMiddleName(String previousMiddleName) {
 		this.previousMiddleName = previousMiddleName;
+	}
+
+	public String getCitizenship() {
+		return citizenship;
+	}
+
+	public void setCitizenship(String citizenship) {
+		this.citizenship = citizenship;
+	}
+
+	public String getRelationSubject() {
+		return relationSubject;
+	}
+
+	public void setRelationSubject(String relationSubject) {
+		this.relationSubject = relationSubject;
 	}
 
 }

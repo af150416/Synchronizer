@@ -1,5 +1,6 @@
 package com.softbistro.declarations.jparser.component.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Map;
 
@@ -8,10 +9,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Realty {
+public class Realty implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@JsonProperty("person")
 	private String personId;
+
+	@JsonProperty("iteration")
+	private String iteration;
 
 	@JsonProperty("rights")
 	private Map<String, Rights> rights;
@@ -70,11 +79,11 @@ public class Realty {
 	}
 
 	public Date getGainDate() {
-		return owningDate;
+		return getOwningDate();
 	}
 
 	public void setGainDate(Date gainDate) {
-		this.owningDate = gainDate;
+		this.setOwningDate(gainDate);
 	}
 
 	public String getCityType() {
@@ -163,6 +172,22 @@ public class Realty {
 
 	public void setCost(String cost) {
 		this.cost = cost;
+	}
+
+	public String getIteration() {
+		return iteration;
+	}
+
+	public void setIteration(String iteration) {
+		this.iteration = iteration;
+	}
+
+	public Date getOwningDate() {
+		return owningDate;
+	}
+
+	public void setOwningDate(Date owningDate) {
+		this.owningDate = owningDate;
 	}
 
 }
