@@ -1,4 +1,4 @@
-package com.softbistro.declarations.jparser.component.service;
+package com.softbistro.declarations.jparser.parsing.json.component.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,19 +22,17 @@ import com.mysql.jdbc.Driver;
 @Repository
 @Component
 public class JparserDao {
-	// @Value("${count.of.records.for.list}")
-	private String str;
 
-	private int countOfRecords = 100; // properties.getProperty("countOfRecordsForList");
+	private int countOfRecords = 10;
 	/**
 	 * Get 400 records from DB with Id Declarations
 	 */
-	private static final String SQL_GET_LIST_ID_DECLARATIONS = "SELECT declaration_id FROM staging_declaration LIMIT ? OFFSET ?";
+	private static final String SQL_GET_LIST_ID_DECLARATIONS = "SELECT declaration_id FROM staging_declaration where status=\"NEW\" LIMIT ? OFFSET ?";
 
 	/**
 	 * Update status in database
 	 */
-	private static final String SQL_UPDATE_VALUE_STATUS = "UPDATE staging_declaration SET status = ? WHERE status = ? LIMIT 400 ";
+	private static final String SQL_UPDATE_VALUE_STATUS = "UPDATE staging_declaration SET status = ? WHERE status = ? LIMIT ? ";
 
 	/**
 	 * Variable for working with database
@@ -86,13 +84,13 @@ public class JparserDao {
 		List<String> listIdDeclarations = new ArrayList<>();
 		page *= countOfRecords;
 
-		String statusForChange = "new";
-		String statusWillBeChaged = "in progress";
-
 		listIdDeclarations = jdbcTemplate.query(SQL_GET_LIST_ID_DECLARATIONS, new WorkingWithData(), countOfRecords,
 				page);
-		// jdbcTemplate.update(SQL_UPDATE_VALUE_STATUS, statusWillBeChaged,
-		// statusForChange);
+
+		String statusForChange = "NEW";
+		String statusWillBeChaged = "IN_PROGRESS";
+
+		jdbcTemplate.update(SQL_UPDATE_VALUE_STATUS, statusWillBeChaged, statusForChange, countOfRecords);
 
 		return listIdDeclarations;
 

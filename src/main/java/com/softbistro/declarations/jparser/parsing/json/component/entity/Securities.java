@@ -1,4 +1,4 @@
-package com.softbistro.declarations.jparser.component.entity;
+package com.softbistro.declarations.jparser.parsing.json.component.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -20,7 +20,7 @@ public class Securities implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@JsonProperty("cost")
-	private Integer cost;
+	private String cost;
 
 	@JsonProperty("amount")
 	private double amount;
@@ -155,11 +155,11 @@ public class Securities implements Serializable {
 		this.emitentUaCompanyName = emitentUaCompanyName;
 	}
 
-	public Integer getCost() {
+	public String getCost() {
 		return cost;
 	}
 
-	public void setCost(Integer cost) {
+	public void setCost(String cost) {
 		this.cost = cost;
 	}
 

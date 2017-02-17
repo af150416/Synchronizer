@@ -1,4 +1,4 @@
-package com.softbistro.declarations.jparser.entity;
+package com.softbistro.declarations.jparser.receiving.declaration.id.entity;
 
 public class Page {
 	public Integer currentPage;

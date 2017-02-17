@@ -1,4 +1,4 @@
-package com.softbistro.declarations.jparser.component.entity;
+package com.softbistro.declarations.jparser.parsing.json.component.entity;
 
 import java.sql.Date;
 import java.util.Map;

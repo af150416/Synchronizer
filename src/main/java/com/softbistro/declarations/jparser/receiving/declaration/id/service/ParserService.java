@@ -1,4 +1,4 @@
-package com.softbistro.declarations.jparser.services;
+package com.softbistro.declarations.jparser.receiving.declaration.id.service;
 
 import java.io.IOException;
 import java.net.URL;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.softbistro.declarations.jparser.entity.Response;
-import com.softbistro.declarations.jparser.entity.StagingDeclaration;
+import com.softbistro.declarations.jparser.receiving.declaration.id.entity.Response;
+import com.softbistro.declarations.jparser.receiving.declaration.id.entity.StagingDeclaration;
 
 @Service
 public class ParserService {

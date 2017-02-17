@@ -1,4 +1,4 @@
-package com.softbistro.declarations.jparser.component.entity;
+package com.softbistro.declarations.jparser.parsing.json.component.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
