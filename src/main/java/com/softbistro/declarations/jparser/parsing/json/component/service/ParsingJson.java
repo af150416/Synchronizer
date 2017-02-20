@@ -59,8 +59,6 @@ public class ParsingJson {
 			System.out.println(collectionId.get(numberPageOfIdDeclaration));
 
 			try {
-				URL url = new URL(pathForDeclaration);
-
 				JSONObject json = readJsonFromUrl(pathForDeclaration);
 
 				for (int i = 2; i < 13; i++) {
