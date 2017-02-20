@@ -25,26 +25,27 @@ import com.softbistro.declarations.jparser.parsing.json.component.service.Parsin
 @ComponentScan(basePackages = "com.softbistro.declarations.jparser")
 public class JParserApplication {
 
-	private ParsingThreds parsingThreds;
+	private static ParsingThreds parsingThreds;
 
 	public static void main(String[] args)
 			throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
 		ApplicationContext context = SpringApplication.run(JParserApplication.class, args);
 		// ParserService parserService = context.getBean(ParserService.class);
 		// parserService.getStagingDeclaration();
+		runThreads();
 
 	}
 
-	@Scheduled(fixedDelay = 15000)
-	public void runThreads() {
+	//@Scheduled(fixedDelay = 15000)
+	public static void runThreads() {
 		parsingThreds = new ParsingThreds();
 		parsingThreds.start();
 
-		parsingThreds = new ParsingThreds();
+		/*parsingThreds = new ParsingThreds();
 		parsingThreds.start();
 
 		parsingThreds = new ParsingThreds();
-		parsingThreds.start();
+		parsingThreds.start();*/
 
 	}
 

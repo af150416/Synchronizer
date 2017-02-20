@@ -1,4 +1,4 @@
-package com.softbistro.declarations.jparser.parsing.json.component.dao;
+package com.softbistro.declarations.jparser.parsing.json.component.dao.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
