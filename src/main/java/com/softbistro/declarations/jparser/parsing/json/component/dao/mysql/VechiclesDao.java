@@ -41,10 +41,10 @@ public class VechiclesDao implements IVechicles{
 						vechicle.setRightsId(Long.valueOf(rights.getPersonId()));
 						vechicle.setIteration(entry.getKey());
 						vechicle.setObjectType(entry.getValue().getObjectType());
-						vechicle.setIncomeSize(entry.getValue().getSizeIncome());
-						vechicle.setIncomeSource(entry.getValue().getIncomeSource());
-						vechicle.setSourceCitizen(entry.getValue().getSourceCitizen());
-						vechicle.setSourceUaCompanyName(entry.getValue().getSourseUaCompanyName());
+						//vechicle.setIncomeSize(entry.getValue().getSizeIncome());
+						//vechicle.setIncomeSource(entry.getValue().getIncomeSource());
+						//vechicle.setSourceCitizen(entry.getValue().getSourceCitizen());
+						//vechicle.setSourceUaCompanyName(entry.getValue().getSourseUaCompanyName());
 					}
 					batchVechicles.add(vechicle);
 				}
