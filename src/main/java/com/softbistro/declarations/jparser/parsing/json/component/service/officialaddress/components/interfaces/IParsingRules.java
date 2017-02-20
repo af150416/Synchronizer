@@ -1,4 +1,4 @@
-package com.devcortes.components.interfaces;
+package com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress.components.interfaces;
 
 /**
  * 

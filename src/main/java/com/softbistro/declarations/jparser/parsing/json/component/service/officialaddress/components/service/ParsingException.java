@@ -1,4 +1,4 @@
-package com.devcortes.components.service;
+package com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress.components.service;
 
 /**
  * Class that process exception when service cannot parse declarion page

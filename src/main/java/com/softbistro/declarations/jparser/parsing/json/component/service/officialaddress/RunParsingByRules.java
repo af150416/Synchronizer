@@ -1,17 +1,12 @@
-package com.devcortes.services;
+package com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.devcortes.components.entity.WorkPlace;
-import com.devcortes.components.interfaces.IParsingRules;
-import com.devcortes.components.service.RuleWorkPlace;
-import com.devcortes.components.service.ParsingException;
-import com.devcortes.components.service.RuleFindRegisteredAddress;
-import com.devcortes.components.service.RuleWorkCategory;
+import com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress.components.interfaces.IParsingRules;
+import com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress.components.service.ParsingException;
 
 /**
  * This service run parsing declaration of official by some rules

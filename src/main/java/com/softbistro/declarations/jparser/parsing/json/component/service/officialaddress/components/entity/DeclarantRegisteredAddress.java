@@ -1,4 +1,4 @@
-package com.devcortes.components.entity;
+package com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress.components.entity;
 
 import java.util.Arrays;
 import java.util.List;

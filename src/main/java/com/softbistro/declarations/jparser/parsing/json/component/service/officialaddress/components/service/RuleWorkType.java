@@ -1,4 +1,4 @@
-package com.devcortes.components.service;
+package com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress.components.service;
 
 import java.io.IOException;
 
@@ -6,8 +6,8 @@ import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import com.devcortes.components.entity.WorkType;
-import com.devcortes.components.interfaces.IParsingRules;
+import com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress.components.entity.WorkType;
+import com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress.components.interfaces.IParsingRules;
 
 public class RuleWorkType implements IParsingRules {
 
