@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.4.3.RELEASE'
+		springBootVersion = '1.5.1.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -29,6 +29,7 @@ repositories {
 
 
 dependencies {
+<<<<<<< HEAD
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '1.5.1.RELEASE'
 
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.1.RELEASE'
@@ -39,6 +40,10 @@ dependencies {
 	compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.5'
 	
 	compile('org.flywaydb:flyway-core:4.0.3')
+=======
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('org.springframework.boot:spring-boot-starter-web')
+>>>>>>> origin/parser
 	compile group: 'org.eclipse.persistence', name: 'javax.persistence', version: '2.1.1'
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.6'
 	compile group: 'org.jsoup', name: 'jsoup', version: '1.7.2'
