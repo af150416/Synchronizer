@@ -42,14 +42,14 @@ public class PersonInfoDao implements IPersonInfo {
 
 	@Override
 	public List<PersonInfo> getSubjectFamily(Declaration declaration, Integer personId) {
-		
+
 		List<PersonInfo> batchFamilyInfo = new ArrayList<>();
-		if(declaration.getDeclarantDatas().getSubjectFamily() == null) {
+		if (declaration.getDeclarantDatas().getSubjectFamily() == null) {
 			return batchFamilyInfo;
 		}
 		for (Map.Entry<String, SubjectFamily> entry : declaration.getDeclarantDatas().getSubjectFamily().entrySet()) {
 			PersonInfo personFamily = new PersonInfo();
-			if(declaration.getDeclarantDatas().getSubjectFamily() != null){
+			if (declaration.getDeclarantDatas().getSubjectFamily() != null) {
 				personFamily.setLastName(entry.getValue().getLastName());
 				personFamily.setFirstName(entry.getValue().getFirstName());
 				personFamily.setMiddleName(entry.getValue().getMiddleName());
@@ -62,7 +62,7 @@ public class PersonInfoDao implements IPersonInfo {
 				personFamily.setCitizenship(entry.getValue().getCitizenship());
 				personFamily.setSubjectRelation(entry.getValue().getSubjectRelation());
 			}
-			
+
 			batchFamilyInfo.add(personFamily);
 		}
 		return batchFamilyInfo;

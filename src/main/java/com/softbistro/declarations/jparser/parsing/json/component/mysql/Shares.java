@@ -1,32 +1,35 @@
 package com.softbistro.declarations.jparser.parsing.json.component.mysql;
 
 import java.sql.Date;
+
 /**
  * Entity for information about shares, securities
+ * 
  * @author cortes
  *
  */
 public class Shares {
 
 	private int id;
-	private int cost;
-	private int amount;
-	private int personId;
-	private int rightsId;
+	private Double cost;
+	private Double amount;
+	private Long personId;
+	private Long rightsId;
 	private String emitent;
-	private int iteration;
+	private String iteration;
 	private Date owningDate;
 	private String emitentType;
 	private String typeProperty;
 	private String emitentUaConmpanyName;
 	private String name;
-	private int country;
+	private String country;
 	private String enName;
 	private String legalForm;
-	private double costPercent;
+	private String costPercent;
 	private String location;
 	private int costDateOrigin;
 	private String descriptionObject;
+	private String person;
 
 	public int getId() {
 		return id;
@@ -36,35 +39,35 @@ public class Shares {
 		this.id = id;
 	}
 
-	public int getCost() {
+	public Double getCost() {
 		return cost;
 	}
 
-	public void setCost(int cost) {
+	public void setCost(Double cost) {
 		this.cost = cost;
 	}
 
-	public int getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 
-	public int getPersonId() {
+	public Long getPersonId() {
 		return personId;
 	}
 
-	public void setPersonId(int personId) {
+	public void setPersonId(Long personId) {
 		this.personId = personId;
 	}
 
-	public int getRightsId() {
+	public Long getRightsId() {
 		return rightsId;
 	}
 
-	public void setRightsId(int rightsId) {
+	public void setRightsId(Long rightsId) {
 		this.rightsId = rightsId;
 	}
 
@@ -76,11 +79,11 @@ public class Shares {
 		this.emitent = emitent;
 	}
 
-	public int getIteration() {
+	public String getIteration() {
 		return iteration;
 	}
 
-	public void setIteration(int iteration) {
+	public void setIteration(String iteration) {
 		this.iteration = iteration;
 	}
 
@@ -124,11 +127,11 @@ public class Shares {
 		this.name = name;
 	}
 
-	public int getCountry() {
+	public String getCountry() {
 		return country;
 	}
 
-	public void setCountry(int country) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 
@@ -148,11 +151,11 @@ public class Shares {
 		this.legalForm = legalForm;
 	}
 
-	public double getCostPercent() {
+	public String getCostPercent() {
 		return costPercent;
 	}
 
-	public void setCostPercent(double costPercent) {
+	public void setCostPercent(String costPercent) {
 		this.costPercent = costPercent;
 	}
 
@@ -178,6 +181,14 @@ public class Shares {
 
 	public void setDescriptionObject(String descriptionObject) {
 		this.descriptionObject = descriptionObject;
+	}
+
+	public String getPerson() {
+		return person;
+	}
+
+	public void setPerson(String person) {
+		this.person = person;
 	}
 
 }

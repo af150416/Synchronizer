@@ -19,27 +19,25 @@ import com.softbistro.declarations.jparser.parsing.json.component.mysql.ShortRig
 @Repository
 public class RealutyDao implements IRealuty {
 
-	private IRights IRights;
+	private IRights iRights;
 	private List<ShortRights> batchRights;
 
 	@Override
 	public List<Realuty> getRealuty(Declaration declaration, Integer personId, Integer rightId) {
 
-		IRights = new RightsDao();
+		iRights = new RightsDao();
 		List<Realuty> batchRealuty = new ArrayList<>();
 		batchRights = new ArrayList<>();
-		if(declaration.getDeclarantDatas().getRealties() == null) {
+		if (declaration.getDeclarantDatas().getRealties() == null) {
 			return batchRealuty;
 		}
 		for (Map.Entry<String, Realty> entry : declaration.getDeclarantDatas().getRealties().entrySet()) {
-
-			
 
 			if (entry.getValue().getRights() != null) {
 
 				for (Map.Entry<String, Rights> right : entry.getValue().getRights().entrySet()) {
 					Realuty subjectRealuty = new Realuty();
-					ShortRights rights = IRights.getRights(right, rightId);
+					ShortRights rights = iRights.getRights(right, rightId);
 					batchRights.add(rights);
 
 					if (declaration.getDeclarantDatas().getRealties() != null) {
