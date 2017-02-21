@@ -38,7 +38,7 @@ public class LuxuryThingsDao implements ILuxuryThings {
 
 					if (declaration.getDeclarantDatas().getMovables() != null) {
 						thing.setPersonId(Long.parseLong(entry.getValue().getPersonId()));
-						thing.setRightsId(Long.valueOf(rights.getPersonId()));
+						thing.setRightsId(rights.getPersonId());
 						thing.setIteration(entry.getKey());
 						thing.setDateUse(entry.getValue().getDateUse());
 						thing.setTrademark(entry.getValue().getTrademark());

@@ -7,7 +7,7 @@ import com.softbistro.declarations.jparser.parsing.json.component.mysql.PersonIn
 
 public interface IPersonInfo {
 	
-	public PersonInfo getPersonInfo(Declaration declaration);
+	public PersonInfo getPersonInfo(Declaration declaration, Integer id);
 	
 	public List<PersonInfo> getSubjectFamily(Declaration declaration, Integer id);
 }

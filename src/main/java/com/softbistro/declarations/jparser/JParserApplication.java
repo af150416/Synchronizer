@@ -30,9 +30,10 @@ public class JParserApplication {
 	public static void main(String[] args)
 			throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
 		ApplicationContext context = SpringApplication.run(JParserApplication.class, args);
+		runThreads();
 	}
 
-	@Scheduled(fixedDelay = 15000)
+	//@Scheduled(fixedDelay = 15000)
 	public static void runThreads() {
 		parsingThreds = new ParsingThreds();
 		parsingThreds.start();

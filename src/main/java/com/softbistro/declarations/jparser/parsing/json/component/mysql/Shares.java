@@ -11,10 +11,10 @@ import java.sql.Date;
 public class Shares {
 
 	private int id;
-	private Double cost;
+	private String cost;
 	private Double amount;
 	private Long personId;
-	private Long rightsId;
+	private String rightsId;
 	private String emitent;
 	private String iteration;
 	private Date owningDate;
@@ -39,11 +39,11 @@ public class Shares {
 		this.id = id;
 	}
 
-	public Double getCost() {
+	public String getCost() {
 		return cost;
 	}
 
-	public void setCost(Double cost) {
+	public void setCost(String cost) {
 		this.cost = cost;
 	}
 
@@ -63,11 +63,11 @@ public class Shares {
 		this.personId = personId;
 	}
 
-	public Long getRightsId() {
+	public String getRightsId() {
 		return rightsId;
 	}
 
-	public void setRightsId(Long rightsId) {
+	public void setRightsId(String rightsId) {
 		this.rightsId = rightsId;
 	}
 

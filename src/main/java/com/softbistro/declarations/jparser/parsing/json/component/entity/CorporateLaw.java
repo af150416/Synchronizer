@@ -21,6 +21,7 @@ public class CorporateLaw implements Serializable {
 
 	private String name;
 
+	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
 	private Integer country;

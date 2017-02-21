@@ -42,7 +42,7 @@ public class RealutyDao implements IRealuty {
 
 					if (declaration.getDeclarantDatas().getRealties() != null) {
 						subjectRealuty.setPersonId(Long.valueOf(personId));
-						subjectRealuty.setRightsId(Long.valueOf(rights.getPersonId()));
+						subjectRealuty.setRightsId(rights.getPersonId());
 						if (StringUtils.isNotBlank(entry.getValue().getCost())) {
 							subjectRealuty.setCostDate(entry.getValue().getCost());
 						}

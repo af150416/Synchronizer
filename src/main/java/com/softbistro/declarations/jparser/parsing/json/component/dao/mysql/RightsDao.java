@@ -13,12 +13,12 @@ public class RightsDao implements IRights {
 
 	@Override
 	public ShortRights getRights(Entry<String, Rights> right, Integer personId) {
-
+		
 		ShortRights rights = new ShortRights();
 		if (right.getKey().equals("1")) {
-			rights.setPersonId(Long.valueOf(personId + 1));
+			rights.setPersonId(personId + "");
 		} else {
-			rights.setPersonId(Long.parseLong(right.getKey()));
+			rights.setPersonId(right.getKey());
 		}
 		rights.setCitizen(right.getValue().getCitizen());
 		rights.setCity(right.getValue().getUaCity());

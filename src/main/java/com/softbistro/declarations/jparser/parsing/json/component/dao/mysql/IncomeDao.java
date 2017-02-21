@@ -38,7 +38,7 @@ public class IncomeDao implements IIncome {
 
 					if (declaration.getDeclarantDatas().getRealties() != null) {
 						income.setPersonId(Long.valueOf(personId));
-						income.setRightsId(Long.valueOf(rights.getPersonId()));
+						income.setRightsId(rights.getPersonId());
 						income.setIteration(entry.getKey());
 						income.setObjectType(entry.getValue().getObjectType());
 						income.setIncomeSize(entry.getValue().getSizeIncome());
@@ -79,7 +79,7 @@ public class IncomeDao implements IIncome {
 
 					if (declaration.getDeclarantDatas().getRealties() != null) {
 						income.setPersonId(Long.valueOf(personId));
-						income.setRightsId(Long.valueOf(rights.getPersonId()));
+						income.setRightsId(rights.getPersonId());
 						income.setObjectType(entry.getValue().getObjectType());
 						income.setSizeAssets(entry.getValue().getSizeAssets());
 						income.setOrganization(entry.getValue().getOrganization());

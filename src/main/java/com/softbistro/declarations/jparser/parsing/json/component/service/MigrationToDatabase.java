@@ -49,11 +49,15 @@ import com.softbistro.declarations.jparser.parsing.json.component.mysql.Vechicle
  */
 @Service
 public class MigrationToDatabase {
+	
+	private static volatile Integer personId;
+	private static volatile Integer rightsId;
 
 	private static final String INSERT_TO_SUBJECT_INFO = "INSERT INTO subject_info (id, country, last_name, first_name, middle_name, post_type, work_post, work_place, post_category, "
-			+ "changed_name, country_path, corruption_affected, previous_last_name, previous_first_name, previous_middle_name, status, responsible_position) "
+			+ "changed_name, country_path, corruption_affected, previous_last_name, previous_first_name, previous_middle_name, status, responsible_position, actual_city,"
+			+ "actual_district, actual_region, actual_country) "
 			+ "VALUES(:id, :country, :lastName, :firstName, :middleName, :postType, :workPost, :workPlace, :postCategory, :changedName, :countryPath, :corruptionPost, :previousLastName, "
-			+ ":previousFirstName, :previousMiddleName, 'DECLARANT', :responsiblePosition)";
+			+ ":previousFirstName, :previousMiddleName, 'DECLARANT', :responsiblePosition, :actualCity, :actualDistrict, :actualRegion, :actualCountry)";
 
 	private static final String INSERT_FAMILY_INFO = "INSERT INTO subject_info (last_name, first_name, middle_name, changed_name, previous_last_name, previous_first_name,"
 			+ " previous_middle_name, family_subject_id, declarant_id, status, citizenship, subject_relation) VALUES(:lastName, :firstName, :middleName, :changedName, :previousLastName, "
@@ -81,7 +85,6 @@ public class MigrationToDatabase {
 	private static final String INSERT_INTO_SHARES_SECURITIES = "INSERT INTO shares (cost, amount, person_id, rights_id, emitent, iteration, owning_date, emitent_type, type_property,"
 			+ "emitent_ua_company_name) "
 			+ "VALUES (:cost, :amount, :personId, :rightsId, :emitent, :iteration, :owningDate, :emitentType, :typeProperty, :emitentUaConmpanyName)";
-
 
 	private static final String INSERT_INTO_SHARES_CORPORATELAW = "INSERT INTO shares (cost, rights_id, `name`, iteration, legal_form, cost_percent, country) "
 			+ "VALUES (:cost, :rightsId, :name, :iteration, :legalForm, :costPercent, :country)";
@@ -144,6 +147,8 @@ public class MigrationToDatabase {
 	}
 
 	public void writeToDB(List<Declaration> batchGetingDeclaration) {
+		
+		System.out.println("Begin-----------------------");
 
 		List<Type> batchType = new ArrayList<>();
 		List<PersonInfo> batchPersonInfo = new ArrayList<>();
@@ -167,61 +172,62 @@ public class MigrationToDatabase {
 		
 
 		
-		Integer personId = jdbcTemplate.queryForObject("SELECT count(id) FROM declaration.subject_info", Integer.class);
+		personId = jdbcTemplate.queryForObject("SELECT count(id) FROM declaration.subject_info", Integer.class);
+		rightsId = jdbcTemplate.queryForObject("SELECT count(id) FROM declaration.rights", Integer.class);
 		for (Declaration declaration : batchGetingDeclaration) {
 			System.out.println(declaration.getId());
 			
 			// step_0
-			batchType.add(iType.getType(declaration, personId++));
+			batchType.add(iType.getType(declaration, ++personId));
 
 			// step_1
-			batchPersonInfo.add(iPersonInfo.getPersonInfo(declaration));
+			batchPersonInfo.add(iPersonInfo.getPersonInfo(declaration, personId));
 
 			// step_2
-			batchFamilyInfo = iPersonInfo.getSubjectFamily(declaration, personId++);
+			batchFamilyInfo = iPersonInfo.getSubjectFamily(declaration, personId);
 
 			// step_3
-			Integer rightsId = jdbcTemplate.queryForObject("SELECT count(id) FROM declaration.rights", Integer.class);
-			batchRealuty = iRealuty.getRealuty(declaration, personId++, rightsId++);			
+			
+			batchRealuty = iRealuty.getRealuty(declaration, personId, ++rightsId);			
 			batchRights = iRealuty.getRights();
 			
 			//step_11
-			rightsId = batchRights.size() + 1;
-			batchIncomeGifts = iIncome.getIncomeGifts(declaration, personId++, rightsId);			
+			rightsId = batchRights.size();
+			batchIncomeGifts = iIncome.getIncomeGifts(declaration, personId, rightsId);			
 			batchRights.addAll(batchRights.size(), iIncome.getRights());
 			
-			rightsId = batchRights.size() + 1;
-			batchIncomeAssets = iIncome.getIncomeCashAssets(declaration, personId++, rightsId);			
+			rightsId = batchRights.size();
+			batchIncomeAssets = iIncome.getIncomeCashAssets(declaration, personId, rightsId);			
 			batchRights.addAll(batchRights.size(), iIncome.getRights());
 			
 			//step_6
-			rightsId = batchRights.size() + 1;
-			batchVechicles = iVechicles.getVechicles(declaration, personId++, rightsId);			
+			rightsId = batchRights.size();
+			batchVechicles = iVechicles.getVechicles(declaration, personId, rightsId);			
 			batchRights.addAll(batchRights.size(), iVechicles.getRights());
 			
 			//step_7
-			rightsId = batchRights.size() + 1;
-			batchSharesSecurities = iShares.getSecurities(declaration, personId++, rightsId);			
+			rightsId = batchRights.size();
+			batchSharesSecurities = iShares.getSecurities(declaration, personId, rightsId);			
 			batchRights.addAll(batchRights.size(), iShares.getRights());
 			
 			//step_8
-			rightsId = batchRights.size() + 1;
-			batchSharesCorporativeLaw = iShares.getCorporateLaw(declaration, personId++, rightsId);			
+			rightsId = batchRights.size();
+			batchSharesCorporativeLaw = iShares.getCorporateLaw(declaration, personId, rightsId);			
 			batchRights.addAll(batchRights.size(), iShares.getRights());
 			
 			//step_9
-			rightsId = batchRights.size() + 1;
-			batchSharesRecipientPay= iShares.getRepicientPay(declaration, personId++, rightsId);			
+			rightsId = batchRights.size();
+			batchSharesRecipientPay= iShares.getRepicientPay(declaration, personId, rightsId);			
 			batchRights.addAll(batchRights.size(), iShares.getRights());
 			
 			//step_5
-			rightsId = batchRights.size() + 1;
-			batchLuxuryThings= iLuxuryThings.getLuxuryThings(declaration, personId++, rightsId);			
+			rightsId = batchRights.size();
+			batchLuxuryThings= iLuxuryThings.getLuxuryThings(declaration, personId, rightsId);			
 			batchRights.addAll(batchRights.size(), iLuxuryThings.getRights());
 			
 		}
 
-		/*SqlParameterSource[] typeBatch = SqlParameterSourceUtils.createBatch(batchType.toArray());
+		SqlParameterSource[] typeBatch = SqlParameterSourceUtils.createBatch(batchType.toArray());
 		namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_TYPE, typeBatch);
 
 		SqlParameterSource[] personInfoBatch = SqlParameterSourceUtils.createBatch(batchPersonInfo.toArray());
@@ -249,7 +255,7 @@ public class MigrationToDatabase {
 		namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_SHARES_CORPORATELAW, sharesCorporativeLawBatch);
 		
 		SqlParameterSource[] sharesRecipientPayBatch = SqlParameterSourceUtils.createBatch(batchSharesRecipientPay.toArray());
-		namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_SHARES_RECIPIENTPAY, sharesRecipientPayBatch);*/
+		namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_SHARES_RECIPIENTPAY, sharesRecipientPayBatch);
 		
 		SqlParameterSource[] luxuryThingsBatch = SqlParameterSourceUtils.createBatch(batchLuxuryThings.toArray());
 		namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_LUXURY_THINGS, luxuryThingsBatch);

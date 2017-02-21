@@ -39,7 +39,7 @@ public class VechiclesDao implements IVechicles {
 
 					if (declaration.getDeclarantDatas().getMovables() != null) {
 						vechicle.setPersonId(Long.valueOf(personId));
-						vechicle.setRightsId(Long.valueOf(rights.getPersonId()));
+						vechicle.setRightsId(rights.getPersonId());
 						vechicle.setIteration(entry.getKey());
 						vechicle.setObjectType(entry.getValue().getObjectType());
 						vechicle.setBrand(entry.getValue().getBarnd());

@@ -40,12 +40,12 @@ public class SharesDao implements IShares {
 
 					if (declaration.getDeclarantDatas().getSecurities() != null) {
 						if (StringUtils.isNotBlank(entry.getValue().getCost())) {
-							share.setCost(Double.parseDouble(entry.getValue().getCost()));
+							share.setCost(entry.getValue().getCost());
 						}
 						share.setPerson(entry.getValue().getPerson());
 						share.setAmount(entry.getValue().getAmount());
 						share.setPersonId(Long.valueOf(personId));
-						share.setRightsId(Long.valueOf(rights.getPersonId()));
+						share.setRightsId(rights.getPersonId());
 						share.setEmitent(entry.getValue().getEmitent());
 						share.setIteration(entry.getKey());
 						share.setOwningDate(entry.getValue().getOwningDate());
@@ -85,8 +85,8 @@ public class SharesDao implements IShares {
 
 					if (declaration.getDeclarantDatas().getCorporateLaw() != null) {
 						corporateLaw.setPersonId(Long.valueOf(personId));
-						corporateLaw.setCost(Double.parseDouble(entry.getValue().getCost()));
-						corporateLaw.setRightsId(Long.valueOf(rights.getPersonId()));
+						corporateLaw.setCost(entry.getValue().getCost());
+						corporateLaw.setRightsId(rights.getPersonId());
 						corporateLaw.setName(entry.getValue().getName());
 						corporateLaw.setIteration(entry.getKey());
 						corporateLaw.setLegalForm(entry.getValue().getLegalForm());

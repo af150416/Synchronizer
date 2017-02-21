@@ -15,7 +15,7 @@ import com.softbistro.declarations.jparser.parsing.json.component.mysql.PersonIn
 public class PersonInfoDao implements IPersonInfo {
 
 	@Override
-	public PersonInfo getPersonInfo(Declaration declaration) {
+	public PersonInfo getPersonInfo(Declaration declaration, Integer personId) {
 
 		PersonInfo personInfo = new PersonInfo();
 		if (declaration.getDeclarantDatas().getSubjectInfo() != null) {
@@ -36,6 +36,12 @@ public class PersonInfoDao implements IPersonInfo {
 			personInfo.setPreviousMiddleName(declaration.getDeclarantDatas().getSubjectInfo().getPreviousMiddleName());
 			personInfo
 					.setResponsiblePosition(declaration.getDeclarantDatas().getSubjectInfo().getResponsiblePosition());
+			
+			personInfo.setActualCity(declaration.getCityDeclarant());
+			personInfo.setActualDistrict(declaration.getDistrictDeclarant());
+			personInfo.setActualRegion(declaration.getRegionNameDeclarant());
+			personInfo.setActualCountry(declaration.getCountryDeclarant());
+			personInfo.setId(personId);
 		}
 		return personInfo;
 	}
@@ -58,7 +64,7 @@ public class PersonInfoDao implements IPersonInfo {
 				personFamily.setPreviousFirstName(entry.getValue().getPreviousFirstName());
 				personFamily.setPreviousMiddleName(entry.getValue().getPreviousMiddleName());
 				personFamily.setFamilySubjectId(entry.getKey());
-				personFamily.setDeclarantId(personId++);
+				personFamily.setDeclarantId(personId);
 				personFamily.setCitizenship(entry.getValue().getCitizenship());
 				personFamily.setSubjectRelation(entry.getValue().getSubjectRelation());
 			}

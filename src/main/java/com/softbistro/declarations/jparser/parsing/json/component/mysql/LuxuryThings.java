@@ -12,7 +12,7 @@ public class LuxuryThings {
 
 	private int id;
 	private Long personId;
-	private Long rightsId;
+	private String rightsId;
 	private Date dateUse;
 	private String iteration;
 	private String trademark;
@@ -37,11 +37,11 @@ public class LuxuryThings {
 		this.personId = personId;
 	}
 
-	public Long getRightsId() {
+	public String getRightsId() {
 		return rightsId;
 	}
 
-	public void setRightsId(Long rightsId) {
+	public void setRightsId(String rightsId) {
 		this.rightsId = rightsId;
 	}
 
