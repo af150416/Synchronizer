@@ -11,15 +11,15 @@ public class DeclarationType {
 	@JsonProperty("declarationYear1")
 	private Integer yearOfDeclaration;
 
-	public int getTypeOfDeclaration() {
+	public Integer getTypeOfDeclaration() {
 		return typeOfDeclaration;
 	}
 
-	public void setTypeOfDeclaration(int typeOfDeclaration) {
+	public void setTypeOfDeclaration(Integer typeOfDeclaration) {
 		this.typeOfDeclaration = typeOfDeclaration;
 	}
 
-	public int getYearOfDeclaration() {
+	public Integer getYearOfDeclaration() {
 		return yearOfDeclaration;
 	}
 

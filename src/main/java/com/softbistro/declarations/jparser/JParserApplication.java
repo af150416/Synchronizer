@@ -35,15 +35,15 @@ public class JParserApplication {
 	}
 
 	// @Scheduled(fixedDelay = 15000)
-	public void runThreads() {
+	public static void runThreads() {
 		parsingThreds = new ParsingThreds();
 		parsingThreds.start();
 
-		parsingThreds = new ParsingThreds();
-		parsingThreds.start();
-
-		parsingThreds = new ParsingThreds();
-		parsingThreds.start();
+		/*
+		 * parsingThreds = new ParsingThreds(); parsingThreds.start();
+		 * 
+		 * parsingThreds = new ParsingThreds(); parsingThreds.start();
+		 */
 
 	}
 

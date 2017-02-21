@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.4.3.RELEASE'
+		springBootVersion = '1.5.1.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -29,6 +29,8 @@ repositories {
 
 
 dependencies {
+
+	compile 'org.apache.commons:commons-lang3:3.5'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '1.5.1.RELEASE'
 
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.1.RELEASE'

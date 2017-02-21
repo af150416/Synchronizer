@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.softbistro.declarations.jparser.parsing.json.component.dao.JparserDao;
+import com.softbistro.declarations.jparser.parsing.json.component.dao.mysql.JparserDao;
 import com.softbistro.declarations.jparser.parsing.json.component.entity.Declaration;
 
 /**
@@ -39,12 +39,12 @@ public class ParsingJson {
 
 	private static Logger log = Logger.getLogger(JparserDao.class.getName());
 
-	private Collection<Declaration> collectionGetingDeclaration;
+	private ArrayList<Declaration> collectionGetingDeclaration;
 
 	/**
 	 * Geting information from response URL
 	 */
-	public void getingInformationFromDeclaration(List<String> collectionId) {
+	public List<Declaration> getingInformationFromDeclaration(List<String> collectionId) {
 		long startTime = System.currentTimeMillis();
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -52,10 +52,10 @@ public class ParsingJson {
 
 		collectionGetingDeclaration = new ArrayList<>();
 
-		for (int numberPageOfIdDeclaration = 0; numberPageOfIdDeclaration < collectionId
-				.size(); numberPageOfIdDeclaration++) {
+		for (int numberPageOfIdDeclaration = 0; numberPageOfIdDeclaration < 1/*collectionId.size()*/; numberPageOfIdDeclaration++) {
 
-			String pathForDeclaration = PATH_FOR_READING_DECLARATION + collectionId.get(numberPageOfIdDeclaration);
+			String pathForDeclaration = PATH_FOR_READING_DECLARATION + "3371ace7-177b-44d6-ba2a-53e023f740be";//collectionId.get(numberPageOfIdDeclaration);
+			//String pathForDeclaration = PATH_FOR_READING_DECLARATION + collectionId.get(numberPageOfIdDeclaration);
 			System.out.println(collectionId.get(numberPageOfIdDeclaration));
 
 			try {
@@ -80,10 +80,13 @@ public class ParsingJson {
 			}
 
 		}
+		
+		
 		log.info(
 				"Size array with declaration :" + collectionGetingDeclaration.size() + "  from:" + collectionId.size());
 		long timeSpent = System.currentTimeMillis() - startTime;
 		log.info("Working parsing : " + timeSpent + " mls");
+		return collectionGetingDeclaration;
 
 	}
 
