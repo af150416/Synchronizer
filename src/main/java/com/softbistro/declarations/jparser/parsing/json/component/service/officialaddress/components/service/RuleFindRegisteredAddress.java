@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,8 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress.components.entity.DeclarantRegisteredAddress;
 import com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress.components.interfaces.IParsingRules;
-
-
 
 /**
  * Service that parse declaration of offcial and return him location
@@ -55,6 +54,9 @@ public class RuleFindRegisteredAddress implements IParsingRules {
 		}
 
 		String textInRegisterAddress = doc.select(path).text();
+		if (StringUtils.isBlank(textInRegisterAddress)) {
+			return new DeclarantRegisteredAddress(new ArrayList<String>());
+		}
 
 		String[] parsedRegisterAddress = textInRegisterAddress
 				.substring(textInRegisterAddress.indexOf(':') + 2, textInRegisterAddress.length()).split("/");

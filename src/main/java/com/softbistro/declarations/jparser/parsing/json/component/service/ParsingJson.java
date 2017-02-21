@@ -8,19 +8,18 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softbistro.declarations.jparser.parsing.json.component.dao.mysql.JparserDao;
 import com.softbistro.declarations.jparser.parsing.json.component.entity.Declaration;
+import com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress.components.service.RuleFindRegisteredAddress;
 
 /**
  * Class for parsing json declaration API
@@ -30,8 +29,7 @@ import com.softbistro.declarations.jparser.parsing.json.component.entity.Declara
  */
 @Service
 public class ParsingJson {
-	@Autowired
-	private JparserDao jparserDao;
+	private static final String PATH_FOR_GETTING_REGION = "body > div:nth-child(3) > fieldset > div:nth-child(4) > div:nth-child(1)";
 
 	private static final String PATH_FOR_READING_DECLARATION = "https://public-api.nazk.gov.ua/v1/declaration/";
 
@@ -51,17 +49,17 @@ public class ParsingJson {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		collectionGetingDeclaration = new ArrayList<>();
+		RuleFindRegisteredAddress ruleFindRegisteredAddress = new RuleFindRegisteredAddress();
+		for (int numberPageOfIdDeclaration = 0; numberPageOfIdDeclaration < collectionId
+				.size(); numberPageOfIdDeclaration++) {
 
-		for (int numberPageOfIdDeclaration = 0; numberPageOfIdDeclaration < 1/*collectionId.size()*/; numberPageOfIdDeclaration++) {
+			String pathForDeclaration = PATH_FOR_READING_DECLARATION + collectionId.get(numberPageOfIdDeclaration);
 
-			String pathForDeclaration = PATH_FOR_READING_DECLARATION + "3371ace7-177b-44d6-ba2a-53e023f740be";//collectionId.get(numberPageOfIdDeclaration);
-			//String pathForDeclaration = PATH_FOR_READING_DECLARATION + collectionId.get(numberPageOfIdDeclaration);
 			System.out.println(collectionId.get(numberPageOfIdDeclaration));
 
 			try {
+				ruleFindRegisteredAddress.parse(collectionId.get(numberPageOfIdDeclaration), PATH_FOR_GETTING_REGION);
 				JSONObject json = readJsonFromUrl(pathForDeclaration);
-
-				System.out.println(json.getJSONObject("data").get("step_1").toString());
 
 				for (int i = 2; i < 13; i++) {
 					if (json.getJSONObject("data").get(String.format("step_%d", i)).toString()
@@ -73,15 +71,20 @@ public class ParsingJson {
 				}
 
 				Declaration declaration = mapper.readValue(json.toString(), Declaration.class);
+				declaration
+						.setRegionNameDeclarant(ruleFindRegisteredAddress.getDeclarantRegisteredAddress().getRegion());
+				declaration.setCityDeclarant(ruleFindRegisteredAddress.getDeclarantRegisteredAddress().getCity());
+				declaration.setCountryDeclarant(ruleFindRegisteredAddress.getDeclarantRegisteredAddress().getCountry());
+				declaration
+						.setDistrictDeclarant(ruleFindRegisteredAddress.getDeclarantRegisteredAddress().getDistrict());
 
 				collectionGetingDeclaration.add(declaration);
-			} catch (IOException e) {
+			} catch (IOException | JSONException e) {
 				e.printStackTrace();
 			}
 
 		}
-		
-		
+
 		log.info(
 				"Size array with declaration :" + collectionGetingDeclaration.size() + "  from:" + collectionId.size());
 		long timeSpent = System.currentTimeMillis() - startTime;

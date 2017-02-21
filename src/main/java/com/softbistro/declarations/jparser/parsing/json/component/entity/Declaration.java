@@ -12,6 +12,8 @@ public class Declaration implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private String id;
+
 	@JsonProperty("created_date")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
 	private Date createdDate;
@@ -22,6 +24,43 @@ public class Declaration implements Serializable {
 
 	@JsonProperty("data")
 	private DeclarantData declarantDatas;
+
+	private String regionNameDeclarant;
+	private String countryDeclarant;
+	private String districtDeclarant;
+	private String cityDeclarant;
+
+	public String getRegionNameDeclarant() {
+		return regionNameDeclarant;
+	}
+
+	public void setRegionNameDeclarant(String regionNameDeclarant) {
+		this.regionNameDeclarant = regionNameDeclarant;
+	}
+
+	public String getCountryDeclarant() {
+		return countryDeclarant;
+	}
+
+	public void setCountryDeclarant(String countryDeclarant) {
+		this.countryDeclarant = countryDeclarant;
+	}
+
+	public String getDistrictDeclarant() {
+		return districtDeclarant;
+	}
+
+	public void setDistrictDeclarant(String districtDeclarant) {
+		this.districtDeclarant = districtDeclarant;
+	}
+
+	public String getCityDeclarant() {
+		return cityDeclarant;
+	}
+
+	public void setCityDeclarant(String cityDeclarant) {
+		this.cityDeclarant = cityDeclarant;
+	}
 
 	public Date getCreatedDate() {
 		return createdDate;
@@ -45,6 +84,14 @@ public class Declaration implements Serializable {
 
 	public void setDeclarantDatas(DeclarantData declarantDatas) {
 		this.declarantDatas = declarantDatas;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

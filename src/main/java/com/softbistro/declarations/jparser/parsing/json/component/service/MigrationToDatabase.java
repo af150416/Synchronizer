@@ -1,6 +1,5 @@
 package com.softbistro.declarations.jparser.parsing.json.component.service;
 
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +64,7 @@ public class MigrationToDatabase {
 
 	private static final String INSERT_INTO_TYPE = "INSERT INTO type (declaration_type, declaration_year, person_id, declaration_id)"
 			+ " VALUES (:declarationType, :declarationYear, :personId, :declarationId) ON DUPLICATE KEY UPDATE declaration_id = :declarationId";
-	
+
 	private static final String INSERT_INTO_INCOME_GIFTS = "INSERT INTO income (person_id, rights_id, iteration, object_type, size_income, income_source, source_citizen, source_ua_company_name)"
 			+ "VALUES (:personId, :rightsId, :iteration, :objectType, :incomeSize, :incomeSource, :sourceCitizen, :sourceUaCompanyName)";
 
@@ -78,8 +77,6 @@ public class MigrationToDatabase {
 
 	private static String INSERT_INTO_LUXURY_THINGS = "INSERT INTO luxury_things (person_id, rights_id, date_use, iteration, trademark, object_type, property_descr, other_object_type,"
 			+ " manufacturer_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-
 
 	private static String INSERT_INTO_FINANCIAL_OBLIGATIONS = "INSERT INTO financial_obligations (person_id, currency, guarantor, date_origin, object_type, size_obligation, "
 			+ "emitent_citizen,other_object_type, guarantor_exist, emitent_company_name, emitent_firstname, emitent_lastname, emitent_middlename, financial_obligationscol, subject_id)"
@@ -99,7 +96,7 @@ public class MigrationToDatabase {
 	private IPersonInfo iPersonInfo = new PersonInfoDao();
 
 	private IRealuty iRealuty = new RealutyDao();
-	
+
 	private IIncome iIncome = new IncomeDao();
 
 	private JdbcTemplate jdbcTemplate = new JdbcTemplate(connectToDB());
@@ -137,18 +134,17 @@ public class MigrationToDatabase {
 
 		List<Costs> batchCosts = new ArrayList<>();
 		List<FinancialObligations> batchFinancialObligations = new ArrayList<>();
-		
+
 		List<LuxuryThings> batchLuxuryThings = new ArrayList<>();
 
 		List<Shares> batchShares = new ArrayList<>();
 
 		List<Vechicles> batchVechicles = new ArrayList<>();
 
-		
 		Integer personId = jdbcTemplate.queryForObject("SELECT count(id) FROM declaration.subject_info", Integer.class);
 		for (Declaration declaration : batchGetingDeclaration) {
-			System.out.println(declaration.getId());
-			
+			// System.out.println(declaration.getId());
+
 			// step_0
 			batchType.add(iType.getType(declaration, personId++));
 
@@ -160,37 +156,50 @@ public class MigrationToDatabase {
 
 			// step_3
 			Integer rightsId = jdbcTemplate.queryForObject("SELECT count(id) FROM declaration.rights", Integer.class);
-			batchRealuty = iRealuty.getRealuty(declaration, personId++, rightsId++);			
+			batchRealuty = iRealuty.getRealuty(declaration, personId++, rightsId++);
 			batchRights = iRealuty.getRights();
-			
-			//step_11
+
+			// step_11
 			rightsId = batchRights.size() + 1;
-			batchIncomeGifts = iIncome.getIncomeGifts(declaration, personId++, rightsId);			
+			batchIncomeGifts = iIncome.getIncomeGifts(declaration, personId++, rightsId);
 			batchRights.addAll(batchRights.size(), iIncome.getRights());
-			
+
 			rightsId = batchRights.size() + 1;
-			batchIncomeAssets = iIncome.getIncomeCashAssets(declaration, personId++, rightsId);			
+			batchIncomeAssets = iIncome.getIncomeCashAssets(declaration, personId++, rightsId);
 			batchRights.addAll(batchRights.size(), iIncome.getRights());
 
 		}
 
-		/*SqlParameterSource[] typeBatch = SqlParameterSourceUtils.createBatch(batchType.toArray());
-		namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_TYPE, typeBatch);
-
-		SqlParameterSource[] personInfoBatch = SqlParameterSourceUtils.createBatch(batchPersonInfo.toArray());
-		namedParameterJdbcTemplate.batchUpdate(INSERT_TO_SUBJECT_INFO, personInfoBatch);
-
-		SqlParameterSource[] familyInfoBatch = SqlParameterSourceUtils.createBatch(batchFamilyInfo.toArray());
-		namedParameterJdbcTemplate.batchUpdate(INSERT_FAMILY_INFO, familyInfoBatch);
-
-		SqlParameterSource[] realutyInfoBatch = SqlParameterSourceUtils.createBatch(batchRealuty.toArray());
-		namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_REALUTY, realutyInfoBatch);
-		
-		SqlParameterSource[] incomeBatchGifts = SqlParameterSourceUtils.createBatch(batchIncomeGifts.toArray());
-		namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_INCOME_GIFTS, incomeBatchGifts);
-		
-		SqlParameterSource[] incomeBatchAssets = SqlParameterSourceUtils.createBatch(batchIncomeAssets.toArray());
-		namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_INCOME_ASSETS, incomeBatchAssets);*/
+		/*
+		 * SqlParameterSource[] typeBatch =
+		 * SqlParameterSourceUtils.createBatch(batchType.toArray());
+		 * namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_TYPE, typeBatch);
+		 * 
+		 * SqlParameterSource[] personInfoBatch =
+		 * SqlParameterSourceUtils.createBatch(batchPersonInfo.toArray());
+		 * namedParameterJdbcTemplate.batchUpdate(INSERT_TO_SUBJECT_INFO,
+		 * personInfoBatch);
+		 * 
+		 * SqlParameterSource[] familyInfoBatch =
+		 * SqlParameterSourceUtils.createBatch(batchFamilyInfo.toArray());
+		 * namedParameterJdbcTemplate.batchUpdate(INSERT_FAMILY_INFO,
+		 * familyInfoBatch);
+		 * 
+		 * SqlParameterSource[] realutyInfoBatch =
+		 * SqlParameterSourceUtils.createBatch(batchRealuty.toArray());
+		 * namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_REALUTY,
+		 * realutyInfoBatch);
+		 * 
+		 * SqlParameterSource[] incomeBatchGifts =
+		 * SqlParameterSourceUtils.createBatch(batchIncomeGifts.toArray());
+		 * namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_INCOME_GIFTS,
+		 * incomeBatchGifts);
+		 * 
+		 * SqlParameterSource[] incomeBatchAssets =
+		 * SqlParameterSourceUtils.createBatch(batchIncomeAssets.toArray());
+		 * namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_INCOME_ASSETS,
+		 * incomeBatchAssets);
+		 */
 
 		SqlParameterSource[] rightsInfoBatch = SqlParameterSourceUtils.createBatch(batchRights.toArray());
 		namedParameterJdbcTemplate.batchUpdate(INSERT_INTO_RIGHTS, rightsInfoBatch);
