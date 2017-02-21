@@ -9,49 +9,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Movable {
-	private int id;
 
-	@JsonProperty("brand")
 	private String brand;
 
-	@JsonProperty("model")
 	private String model;
 
-	@JsonProperty("person")
 	private String person;
 
-	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
-	@JsonProperty("costDate")
 	private double costDate;
 
-	@JsonProperty("objectType")
 	private String objectType;
 
-	@JsonProperty("owningDate")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
 	private Date owningDate;
 
-	@JsonProperty("typeProperty")
 	private String typeProperty;
 
-	@JsonProperty("graduationYear")
 	private int graduationYear;
 
-	@JsonProperty("otherTypeProperty")
 	private String otherTypeProperty;
 
 	@JsonProperty("costDate_extendedstatus")
 	private String costDateExtendedStatus;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getBarnd() {
 		return brand;

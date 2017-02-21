@@ -8,14 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Rights implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private String id;
 
-	@JsonProperty("citizen")
 	private String citizen;
 
 	@JsonProperty("ua_city")
@@ -33,7 +29,6 @@ public class Rights implements Serializable {
 	@JsonProperty("eng_postCode")
 	private String engPostCode;
 
-	@JsonProperty("rightBelongs")
 	private String rightBelongs;
 
 	@JsonProperty("ua_firstname")
@@ -42,13 +37,11 @@ public class Rights implements Serializable {
 	@JsonProperty("ukr_lastname")
 	private String ukrLastName;
 
-	@JsonProperty("ownershipType")
 	private String ownerShipType;
 
 	@JsonProperty("ua_middlename")
 	private String uaMiddleName;
 
-	@JsonProperty("otherOwnership")
 	private String otherOwnerShip;
 
 	@JsonProperty("rights_cityPath")

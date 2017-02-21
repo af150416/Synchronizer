@@ -7,27 +7,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CashAssets {
-	private int id;
 
 	@JsonProperty("person")
 	private String personId;
 
-	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
-	@JsonProperty("objectType")
 	private String objectType;
 
-	@JsonProperty("sizeAssets")
 	private double sizeAssets;
 
-	@JsonProperty("organization")
 	private String organization;
 
-	@JsonProperty("assetsCurrency")
 	private String assetsCurrency;
 
-	@JsonProperty("otherObjectType")
 	private String otherObjectType;
 
 	@JsonProperty("organization_type")
@@ -65,14 +58,6 @@ public class CashAssets {
 
 	@JsonProperty("organization_eng_company_name")
 	private String organizationEngCompanyName;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getObjectType() {
 		return objectType;

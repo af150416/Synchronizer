@@ -23,7 +23,6 @@ public class DeclarantRegisteredAddress {
 	private String region;
 	private String country;
 
-
 	/***
 	 * Constructor with parameters that receive list with address of official
 	 * and create object DeclarantRegisteredAddress
@@ -33,14 +32,16 @@ public class DeclarantRegisteredAddress {
 	 */
 	public DeclarantRegisteredAddress(List<String> valuesOfRegisterAddress) {
 
-		int emptyCount = LENGHT - valuesOfRegisterAddress.size();
-		String[] arrayEmptyCount = new String[emptyCount];
-		valuesOfRegisterAddress.addAll(1, Arrays.asList(arrayEmptyCount));
+		if (!valuesOfRegisterAddress.isEmpty()) {
+			int emptyCount = LENGHT - valuesOfRegisterAddress.size();
+			String[] arrayEmptyCount = new String[emptyCount];
+			valuesOfRegisterAddress.addAll(1, Arrays.asList(arrayEmptyCount));
 
-		this.city = valuesOfRegisterAddress.get(0);
-		this.district = valuesOfRegisterAddress.get(1);
-		this.region = valuesOfRegisterAddress.get(2);
-		this.country = valuesOfRegisterAddress.get(3);
+			this.city = valuesOfRegisterAddress.get(0);
+			this.district = valuesOfRegisterAddress.get(1);
+			this.region = valuesOfRegisterAddress.get(2);
+			this.country = valuesOfRegisterAddress.get(3);
+		}
 
 	}
 
