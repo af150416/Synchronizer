@@ -15,22 +15,17 @@ public class RecipientPay implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonProperty("name")
 	private String name;
 
-	@JsonProperty("person")
 	private String person;
 
-	@JsonProperty("country")
 	private String country;
 
 	@JsonProperty("en_name")
 	private String enName;
 
-	@JsonProperty("location")
 	private String location;
 
-	@JsonProperty("legalForm")
 	private String legalForm;
 
 	@JsonProperty("uafirm_reestrCode")

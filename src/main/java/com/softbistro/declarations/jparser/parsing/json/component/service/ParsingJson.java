@@ -61,6 +61,8 @@ public class ParsingJson {
 			try {
 				JSONObject json = readJsonFromUrl(pathForDeclaration);
 
+				System.out.println(json.getJSONObject("data").get("step_1").toString());
+
 				for (int i = 2; i < 13; i++) {
 					if (json.getJSONObject("data").get(String.format("step_%d", i)).toString()
 							.equals(LINE_FOR_CHECKING_STEP_ON_EMPTY_VALUE)

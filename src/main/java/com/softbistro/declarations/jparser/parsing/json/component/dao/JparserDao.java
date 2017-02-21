@@ -23,7 +23,7 @@ import com.mysql.jdbc.Driver;
 @Component
 public class JparserDao {
 
-	private int countOfRecords = 10;
+	private int countOfRecords = 400;
 	/**
 	 * Get 400 records from DB with Id Declarations
 	 */
@@ -90,7 +90,8 @@ public class JparserDao {
 		String statusForChange = "NEW";
 		String statusWillBeChaged = "IN_PROGRESS";
 
-		jdbcTemplate.update(SQL_UPDATE_VALUE_STATUS, statusWillBeChaged, statusForChange, countOfRecords);
+		// jdbcTemplate.update(SQL_UPDATE_VALUE_STATUS, statusWillBeChaged,
+		// statusForChange, countOfRecords);
 
 		return listIdDeclarations;
 

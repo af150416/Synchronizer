@@ -9,11 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Declaration implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	private String id;
 
 	@JsonProperty("created_date")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
@@ -40,14 +37,6 @@ public class Declaration implements Serializable {
 
 	public void setLastModifiedDate(Date lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public DeclarantData getDeclarantDatas() {
