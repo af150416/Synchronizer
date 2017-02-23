@@ -10,8 +10,6 @@ public class SubjectFamily implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
-
 	@JsonProperty("lastname")
 	private String lastName;
 
@@ -21,7 +19,6 @@ public class SubjectFamily implements Serializable {
 	@JsonProperty("middlename")
 	private String middleName;
 
-	@JsonProperty("changedName")
 	private boolean changedName;
 
 	@JsonProperty("eng_lastname")
@@ -30,7 +27,6 @@ public class SubjectFamily implements Serializable {
 	@JsonProperty("eng_firstname")
 	private String engFirstName;
 
-	@JsonProperty("subjectRelation")
 	private String subjectRelation;
 
 	@JsonProperty("previous_lastname")
@@ -42,19 +38,10 @@ public class SubjectFamily implements Serializable {
 	@JsonProperty("previous_middlename")
 	private String previousMiddleName;
 
-	@JsonProperty("citizenship")
 	private String citizenship;
 
 	@JsonProperty("relation_subject")
 	private String relationSubject;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		id = id;
-	}
 
 	public String getLastName() {
 		return lastName;

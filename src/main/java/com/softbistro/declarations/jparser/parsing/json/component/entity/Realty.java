@@ -11,33 +11,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Realty implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@JsonProperty("person")
 	private String personId;
 
-	@JsonProperty("iteration")
 	private String iteration;
 
 	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
-	@JsonProperty("country")
 	private Integer country;
 
 	@JsonProperty("costDate")
 	private String cost;
 
-	@JsonProperty("totalArea")
 	private String totalArea;
 
-	@JsonProperty("objectType")
 	private String objectType;
 
-	@JsonProperty("owningDate")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
 	private Date owningDate;
 
@@ -47,7 +39,6 @@ public class Realty implements Serializable {
 	@JsonProperty("ua_postCode")
 	private Integer postCode;
 
-	@JsonProperty("costAssessment")
 	private String costAssessment;
 
 	@JsonProperty("otherObjectType")

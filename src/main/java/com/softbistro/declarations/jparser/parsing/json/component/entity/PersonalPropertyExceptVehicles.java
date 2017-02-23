@@ -25,32 +25,24 @@ public class PersonalPropertyExceptVehicles implements Serializable {
 	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
-	@JsonProperty("dateUse")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
 	private Date dateUse;
 
 	@JsonProperty("acqPeriod")
 	private String whenTakeProperty;
 
-	@JsonProperty("iteration")
 	private String iteration;
 
-	@JsonProperty("trademark")
 	private String trademark;
 
-	@JsonProperty("objectType")
 	private String objectType;
 
-	@JsonProperty("acqBeforFD")
 	private boolean acqBeforeFD;
 
-	@JsonProperty("costDateUse")
 	private String costDateUse;
 
-	@JsonProperty("propertyDescr")
 	private String propertyDescr;
 
-	@JsonProperty("otherObjectType")
 	private String otherObjectType;
 
 	@JsonProperty("manufacturerName")

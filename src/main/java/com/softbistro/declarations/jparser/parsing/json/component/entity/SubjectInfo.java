@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SubjectInfo {
 
-	@JsonProperty("country")
 	private String country;
 
 	@JsonProperty("lastname")
@@ -24,10 +23,8 @@ public class SubjectInfo {
 	@JsonProperty("actual_country")
 	private String actualCountry;
 
-	@JsonProperty("postType")
 	private String postType;
 
-	@JsonProperty("workPost")
 	private String workPost;
 
 	@JsonProperty("firstname")
@@ -39,19 +36,15 @@ public class SubjectInfo {
 	@JsonProperty("middlename")
 	private String middleName;
 
-	@JsonProperty("changedName")
 	private boolean changedName;
 
-	@JsonProperty("countryPath")
 	private String countryPath;
 
-	@JsonProperty("postCategory")
 	private String postCategory;
 
 	@JsonProperty("previous_lastname")
 	private String previousLastName;
 
-	@JsonProperty("corruptionAffected")
 	private String corruptionAffected;
 
 	@JsonProperty("previous_firstname")
@@ -60,7 +53,6 @@ public class SubjectInfo {
 	@JsonProperty("previous_middlename")
 	private String previousMiddleName;
 
-	@JsonProperty("responsiblePosition")
 	private String responsiblePosition;
 
 	@JsonProperty("housePartNum_extendedstatus")

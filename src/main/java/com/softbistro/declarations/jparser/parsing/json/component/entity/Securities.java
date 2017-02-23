@@ -19,38 +19,29 @@ public class Securities implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonProperty("cost")
 	private String cost;
 
-	@JsonProperty("amount")
 	private double amount;
 
-	@JsonProperty("person")
 	private String person;
 
 	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
-	@JsonProperty("emitent")
 	private String emitent;
 
-	@JsonProperty("owningDate")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")
 	private Date owningDate;
 
 	@JsonProperty("emitent_type")
 	private String emitentType;
 
-	@JsonProperty("typeProperty")
 	private String typeProperty;
 
-	@JsonProperty("otherObjectType")
 	private String otherObjectType;
 
-	@JsonProperty("subTypeProperty1")
 	private String subTypeProperty1;
 
-	@JsonProperty("subTypeProperty2")
 	private String subTypeProperty2;
 
 	@JsonProperty("emitent_ua_lastname")

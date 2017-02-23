@@ -15,19 +15,15 @@ public class MoneyGifts {
 	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
-	@JsonProperty("objectType")
 	private String objectType;
 
-	@JsonProperty("sizeIncome")
 	private double sizeIncome;
 
-	@JsonProperty("incomeSource")
 	private String incomeSource;
 
 	@JsonProperty("source_citizen")
 	private String sourceCitizen;
 
-	@JsonProperty("otherObjectType")
 	private String otherObjectType;
 
 	@JsonProperty("source_ua_lastname")

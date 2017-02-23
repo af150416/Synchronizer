@@ -17,25 +17,20 @@ public class CorporateLaw implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonProperty("cost")
 	private String cost;
 
-	@JsonProperty("name")
 	private String name;
 
 	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
-	@JsonProperty("country")
 	private Integer country;
 
 	@JsonProperty("en_name")
 	private String enName;
 
-	@JsonProperty("iteration")
 	private String iteration;
 
-	@JsonProperty("legalForm")
 	private String legalForm;
 
 	@JsonProperty("cost_percent")
