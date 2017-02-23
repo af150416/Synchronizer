@@ -29,7 +29,7 @@ import com.softbistro.declarations.jparser.parsing.json.component.service.offici
  */
 @Service
 public class ParsingJson {
-	
+
 	private static final String PATH_FOR_GETTING_REGION = "body > div:nth-child(3) > fieldset > div:nth-child(4) > div:nth-child(1)";
 
 	private final String PATH_FOR_READING_DECLARATION = "https://public-api.nazk.gov.ua/v1/declaration/";
@@ -63,7 +63,8 @@ public class ParsingJson {
 
 		collectionGetingDeclaration = new ArrayList<>();
 		RuleFindRegisteredAddress ruleFindRegisteredAddress = new RuleFindRegisteredAddress();
-		for (int numberPageOfIdDeclaration = 0; numberPageOfIdDeclaration < collectionId.size(); numberPageOfIdDeclaration++) {
+		for (int numberPageOfIdDeclaration = 0; numberPageOfIdDeclaration < collectionId
+				.size(); numberPageOfIdDeclaration++) {
 
 			String pathForDeclaration = PATH_FOR_READING_DECLARATION + collectionId.get(numberPageOfIdDeclaration);
 
@@ -93,7 +94,8 @@ public class ParsingJson {
 
 		}
 
-		log.info("Size array with declaration :" + collectionGetingDeclaration.size() + "from " + collectionId.size());
+		log.info(String.format("Size array with declaration :%d from %d", collectionGetingDeclaration.size(),
+				collectionId.size()));
 		return collectionGetingDeclaration;
 
 	}
