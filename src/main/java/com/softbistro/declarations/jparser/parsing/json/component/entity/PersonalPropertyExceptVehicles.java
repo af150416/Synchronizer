@@ -22,6 +22,7 @@ public class PersonalPropertyExceptVehicles implements Serializable {
 	@JsonProperty("person")
 	private String personId;
 
+	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy")

@@ -25,6 +25,7 @@ public class Securities implements Serializable {
 
 	private String person;
 
+	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
 	private String emitent;

@@ -18,6 +18,7 @@ public class Realty implements Serializable {
 
 	private String iteration;
 
+	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
 	private Integer country;

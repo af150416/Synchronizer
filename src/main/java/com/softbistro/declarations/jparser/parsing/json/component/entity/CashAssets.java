@@ -11,6 +11,7 @@ public class CashAssets {
 	@JsonProperty("person")
 	private String personId;
 
+	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
 	private String objectType;

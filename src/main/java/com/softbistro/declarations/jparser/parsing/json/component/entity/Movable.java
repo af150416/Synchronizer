@@ -16,6 +16,7 @@ public class Movable {
 
 	private String person;
 
+	@JsonProperty("rights")
 	private Map<String, Rights> rights;
 
 	private double costDate;

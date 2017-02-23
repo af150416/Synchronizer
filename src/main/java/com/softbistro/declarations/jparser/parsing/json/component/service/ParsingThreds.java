@@ -2,7 +2,6 @@ package com.softbistro.declarations.jparser.parsing.json.component.service;
 
 import com.softbistro.declarations.jparser.parsing.json.component.dao.mysql.JparserDao;
 
-
 public class ParsingThreds extends Thread {
 	private static int pageDeclarationId = 0;
 
@@ -22,10 +21,7 @@ public class ParsingThreds extends Thread {
 	public void show() {
 		JparserDao jparserDao = new JparserDao();
 		ParsingJson parsingJson = new ParsingJson();
-		MigrationToDatabase migrationToDatabase = new MigrationToDatabase();
-		migrationToDatabase.writeToDB(parsingJson.getingInformationFromDeclaration(jparserDao.getListIdDeclaration(pageDeclarationId++)));
-
-		
+		parsingJson.getingInformationFromDeclaration(jparserDao.getListIdDeclaration(pageDeclarationId++));
 	}
 
 }
