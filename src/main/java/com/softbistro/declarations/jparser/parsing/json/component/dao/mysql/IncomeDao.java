@@ -15,16 +15,16 @@ import com.softbistro.declarations.jparser.parsing.json.component.mysql.ShortRig
 
 public class IncomeDao implements IIncome {
 
-	private IRights IRights;
+	private IRights iRights;
 	private List<ShortRights> batchRights;
 
 	@Override
 	public List<Income> getIncomeGifts(Declaration declaration, Integer personId, Integer rightId) {
 
-		IRights = new RightsDao();
+		iRights = new RightsDao();
 		List<Income> batchIncome = new ArrayList<>();
 		batchRights = new ArrayList<>();
-		if(declaration.getDeclarantDatas().getMoneyGifts() == null) {
+		if (declaration.getDeclarantDatas().getMoneyGifts() == null) {
 			return batchIncome;
 		}
 		for (Map.Entry<String, MoneyGifts> entry : declaration.getDeclarantDatas().getMoneyGifts().entrySet()) {
@@ -33,12 +33,12 @@ public class IncomeDao implements IIncome {
 
 				for (Map.Entry<String, Rights> right : entry.getValue().getRights().entrySet()) {
 					Income income = new Income();
-					ShortRights rights = IRights.getRights(right, rightId);
+					ShortRights rights = iRights.getRights(right, rightId);
 					batchRights.add(rights);
 
 					if (declaration.getDeclarantDatas().getRealties() != null) {
 						income.setPersonId(Long.valueOf(personId));
-						income.setRightsId(Long.valueOf(rights.getPersonId()));
+						income.setRightsId(rights.getPersonId());
 						income.setIteration(entry.getKey());
 						income.setObjectType(entry.getValue().getObjectType());
 						income.setIncomeSize(entry.getValue().getSizeIncome());
@@ -62,10 +62,10 @@ public class IncomeDao implements IIncome {
 	@Override
 	public List<Income> getIncomeCashAssets(Declaration declaration, Integer personId, Integer rightId) {
 
-		IRights = new RightsDao();
+		iRights = new RightsDao();
 		List<Income> batchIncome = new ArrayList<>();
 		batchRights = new ArrayList<>();
-		if(declaration.getDeclarantDatas().getCashAssets() == null) {
+		if (declaration.getDeclarantDatas().getCashAssets() == null) {
 			return batchIncome;
 		}
 		for (Map.Entry<String, CashAssets> entry : declaration.getDeclarantDatas().getCashAssets().entrySet()) {
@@ -74,12 +74,12 @@ public class IncomeDao implements IIncome {
 
 				for (Map.Entry<String, Rights> right : entry.getValue().getRights().entrySet()) {
 					Income income = new Income();
-					ShortRights rights = IRights.getRights(right, rightId);
+					ShortRights rights = iRights.getRights(right, rightId);
 					batchRights.add(rights);
 
 					if (declaration.getDeclarantDatas().getRealties() != null) {
 						income.setPersonId(Long.valueOf(personId));
-						income.setRightsId(Long.valueOf(rights.getPersonId()));
+						income.setRightsId(rights.getPersonId());
 						income.setObjectType(entry.getValue().getObjectType());
 						income.setSizeAssets(entry.getValue().getSizeAssets());
 						income.setOrganization(entry.getValue().getOrganization());

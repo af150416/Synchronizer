@@ -9,7 +9,7 @@ package com.softbistro.declarations.jparser.parsing.json.component.mysql;
 public class ShortRights {
 
 	private int id;
-	private Long personId;
+	private String personId;
 	private String citizen;
 	private String country;
 	private String city;
@@ -37,11 +37,11 @@ public class ShortRights {
 		this.id = id;
 	}
 
-	public Long getPersonId() {
+	public String getPersonId() {
 		return personId;
 	}
 
-	public void setPersonId(Long personId) {
+	public void setPersonId(String personId) {
 		this.personId = personId;
 	}
 

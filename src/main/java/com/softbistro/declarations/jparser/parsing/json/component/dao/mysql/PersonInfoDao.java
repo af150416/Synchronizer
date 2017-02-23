@@ -15,7 +15,7 @@ import com.softbistro.declarations.jparser.parsing.json.component.mysql.PersonIn
 public class PersonInfoDao implements IPersonInfo {
 
 	@Override
-	public PersonInfo getPersonInfo(Declaration declaration) {
+	public PersonInfo getPersonInfo(Declaration declaration, Integer personId) {
 
 		PersonInfo personInfo = new PersonInfo();
 		if (declaration.getDeclarantDatas().getSubjectInfo() != null) {
@@ -36,20 +36,26 @@ public class PersonInfoDao implements IPersonInfo {
 			personInfo.setPreviousMiddleName(declaration.getDeclarantDatas().getSubjectInfo().getPreviousMiddleName());
 			personInfo
 					.setResponsiblePosition(declaration.getDeclarantDatas().getSubjectInfo().getResponsiblePosition());
+			
+			personInfo.setActualCity(declaration.getCityDeclarant());
+			personInfo.setActualDistrict(declaration.getDistrictDeclarant());
+			personInfo.setActualRegion(declaration.getRegionNameDeclarant());
+			personInfo.setActualCountry(declaration.getCountryDeclarant());
+			personInfo.setId(personId);
 		}
 		return personInfo;
 	}
 
 	@Override
 	public List<PersonInfo> getSubjectFamily(Declaration declaration, Integer personId) {
-		
+
 		List<PersonInfo> batchFamilyInfo = new ArrayList<>();
-		if(declaration.getDeclarantDatas().getSubjectFamily() == null) {
+		if (declaration.getDeclarantDatas().getSubjectFamily() == null) {
 			return batchFamilyInfo;
 		}
 		for (Map.Entry<String, SubjectFamily> entry : declaration.getDeclarantDatas().getSubjectFamily().entrySet()) {
 			PersonInfo personFamily = new PersonInfo();
-			if(declaration.getDeclarantDatas().getSubjectFamily() != null){
+			if (declaration.getDeclarantDatas().getSubjectFamily() != null) {
 				personFamily.setLastName(entry.getValue().getLastName());
 				personFamily.setFirstName(entry.getValue().getFirstName());
 				personFamily.setMiddleName(entry.getValue().getMiddleName());
@@ -58,11 +64,11 @@ public class PersonInfoDao implements IPersonInfo {
 				personFamily.setPreviousFirstName(entry.getValue().getPreviousFirstName());
 				personFamily.setPreviousMiddleName(entry.getValue().getPreviousMiddleName());
 				personFamily.setFamilySubjectId(entry.getKey());
-				personFamily.setDeclarantId(personId++);
+				personFamily.setDeclarantId(personId);
 				personFamily.setCitizenship(entry.getValue().getCitizenship());
 				personFamily.setSubjectRelation(entry.getValue().getSubjectRelation());
 			}
-			
+
 			batchFamilyInfo.add(personFamily);
 		}
 		return batchFamilyInfo;

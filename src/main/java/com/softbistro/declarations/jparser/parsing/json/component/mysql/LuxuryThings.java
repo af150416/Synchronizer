@@ -11,10 +11,10 @@ import java.sql.Date;
 public class LuxuryThings {
 
 	private int id;
-	private int personId;
-	private int rightsId;
+	private Long personId;
+	private String rightsId;
 	private Date dateUse;
-	private int iteration;
+	private String iteration;
 	private String trademark;
 	private String objectType;
 	private String propertyDescr;
@@ -29,19 +29,19 @@ public class LuxuryThings {
 		this.id = id;
 	}
 
-	public int getPersonId() {
+	public Long getPersonId() {
 		return personId;
 	}
 
-	public void setPersonId(int personId) {
+	public void setPersonId(Long personId) {
 		this.personId = personId;
 	}
 
-	public int getRightsId() {
+	public String getRightsId() {
 		return rightsId;
 	}
 
-	public void setRightsId(int rightsId) {
+	public void setRightsId(String rightsId) {
 		this.rightsId = rightsId;
 	}
 
@@ -53,11 +53,11 @@ public class LuxuryThings {
 		this.dateUse = dateUse;
 	}
 
-	public int getIteration() {
+	public String getIteration() {
 		return iteration;
 	}
 
-	public void setIteration(int iteration) {
+	public void setIteration(String iteration) {
 		this.iteration = iteration;
 	}
 

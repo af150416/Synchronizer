@@ -14,12 +14,12 @@ public class Vechicles {
 	private String brand;
 	private String model;
 	private Long personId;
-	private Long rightsId;
-	private String costDate;
+	private String rightsId;
+	private Double costDate;
 	private String iteration;
 	private String objectType;
 	private Date owningDate;
-	private Date graduationYear;
+	private Integer graduationYear;
 	private String otherObjectType;
 	public int getId() {
 		return id;
@@ -45,16 +45,16 @@ public class Vechicles {
 	public void setPersonId(Long personId) {
 		this.personId = personId;
 	}
-	public Long getRightsId() {
+	public String getRightsId() {
 		return rightsId;
 	}
-	public void setRightsId(Long rightsId) {
+	public void setRightsId(String rightsId) {
 		this.rightsId = rightsId;
 	}
-	public String getCostDate() {
+	public Double getCostDate() {
 		return costDate;
 	}
-	public void setCostDate(String costDate) {
+	public void setCostDate(Double costDate) {
 		this.costDate = costDate;
 	}
 	public String getIteration() {
@@ -75,10 +75,10 @@ public class Vechicles {
 	public void setOwningDate(Date owningDate) {
 		this.owningDate = owningDate;
 	}
-	public Date getGraduationYear() {
+	public Integer getGraduationYear() {
 		return graduationYear;
 	}
-	public void setGraduationYear(Date graduationYear) {
+	public void setGraduationYear(Integer graduationYear) {
 		this.graduationYear = graduationYear;
 	}
 	public String getOtherObjectType() {
