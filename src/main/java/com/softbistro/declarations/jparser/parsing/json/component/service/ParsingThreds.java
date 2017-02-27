@@ -3,8 +3,6 @@ package com.softbistro.declarations.jparser.parsing.json.component.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Service;
@@ -23,12 +21,13 @@ public class ParsingThreds extends Thread {
 
 	private JdbcTemplate jdbcTemplate = new JdbcTemplate(connectToDB());
 
-	/*@Autowired
-	JparserDao jparserDao;
-	@Autowired
-	ParsingJson parsingJson;
-	@Autowired
-	MigrationToDatabase migrationToDatabase;*/
+	/*
+	 * @Autowired JparserDao jparserDao;
+	 * 
+	 * @Autowired ParsingJson parsingJson;
+	 * 
+	 * @Autowired MigrationToDatabase migrationToDatabase;
+	 */
 
 	/**
 	 * Connecting to DB on server<br>
@@ -73,10 +72,12 @@ public class ParsingThreds extends Thread {
 			personId = jdbcTemplate.queryForObject("SELECT MAX(`id`) FROM declaration.subject_info", Integer.class);
 		}
 
-		List<Declaration> list = parsingJson.getingInformationFromDeclaration(jparserDao.getListIdDeclaration(pageDeclarationId++));
+		List<Declaration> list = parsingJson
+				.getingInformationFromDeclaration(jparserDao.getListIdDeclaration(pageDeclarationId++));
 
 		migrationToDatabase.writeToDB(list, (personId + (list.size() * step++)));
 
+		parsingJson.getingInformationFromDeclaration(jparserDao.getListIdDeclaration(pageDeclarationId++));
 	}
 
 }

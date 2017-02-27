@@ -9,15 +9,15 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.softbistro.declarations.jparser.parsing.json.component.dao.mysql.JparserDao;
 import com.softbistro.declarations.jparser.parsing.json.component.entity.Declaration;
 import com.softbistro.declarations.jparser.parsing.json.component.service.officialaddress.components.service.RuleFindRegisteredAddress;
 
@@ -29,29 +29,42 @@ import com.softbistro.declarations.jparser.parsing.json.component.service.offici
  */
 @Service
 public class ParsingJson {
-	
+
 	private static final String PATH_FOR_GETTING_REGION = "body > div:nth-child(3) > fieldset > div:nth-child(4) > div:nth-child(1)";
 
-	private static final String PATH_FOR_READING_DECLARATION = "https://public-api.nazk.gov.ua/v1/declaration/";
+	private final String PATH_FOR_READING_DECLARATION = "https://public-api.nazk.gov.ua/v1/declaration/";
 
 	private static final String LINE_FOR_CHECKING_STEP_ON_EMPTY_VALUE = "{\"empty\":\"У суб'єкта декларування відсутні об'єкти для декларування в цьому розділі.\"}";
 
-	private static Logger log = Logger.getLogger(JparserDao.class.getName());
+	private final String OBJECT_THAT_CONTAIN_STEPS = "data";
 
-	private ArrayList<Declaration> collectionGetingDeclaration;
+	/**
+	 * step for start checkng response information
+	 */
+	private final Integer START_STEP = 2;
+
+	/**
+	 * step for finish checkng response information
+	 */
+	private final Integer FINISH_STEP = 13;
+
+	private static final Logger log = LogManager.getLogger(ParsingJson.class);
+
+	private List<Declaration> collectionGetingDeclaration;
 
 	/**
 	 * Geting information from response URL
 	 */
 	public List<Declaration> getingInformationFromDeclaration(List<String> collectionId) {
-		long startTime = System.currentTimeMillis();
-
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+		boolean failOnUnknownProporties = false;
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, failOnUnknownProporties);
 
 		collectionGetingDeclaration = new ArrayList<>();
 		RuleFindRegisteredAddress ruleFindRegisteredAddress = new RuleFindRegisteredAddress();
-		for (int numberPageOfIdDeclaration = 0; numberPageOfIdDeclaration < collectionId.size(); numberPageOfIdDeclaration++) {
+		for (int numberPageOfIdDeclaration = 0; numberPageOfIdDeclaration < collectionId
+				.size(); numberPageOfIdDeclaration++) {
 
 			String pathForDeclaration = PATH_FOR_READING_DECLARATION + collectionId.get(numberPageOfIdDeclaration);
 
@@ -59,53 +72,61 @@ public class ParsingJson {
 
 			try {
 				ruleFindRegisteredAddress.parse(collectionId.get(numberPageOfIdDeclaration), PATH_FOR_GETTING_REGION);
+				String checkingStep;
 				JSONObject json = readJsonFromUrl(pathForDeclaration);
+				JSONObject jsonObjectWithData = json.getJSONObject(OBJECT_THAT_CONTAIN_STEPS);
 
-				for (int i = 2; i < 13; i++) {
-					if (json.getJSONObject("data").get(String.format("step_%d", i)).toString()
-							.equals(LINE_FOR_CHECKING_STEP_ON_EMPTY_VALUE)
-							|| (json.getJSONObject("data").get(String.format("step_%d", i)).toString().equals("[]"))) {
+				for (int i = START_STEP; i < FINISH_STEP; i++) {
+					checkingStep = String.format("step_%d", i);
 
-						json.getJSONObject("data").remove(String.format("step_%d", i));
+					if (jsonObjectWithData.get(checkingStep).toString().equals(LINE_FOR_CHECKING_STEP_ON_EMPTY_VALUE)
+							|| (jsonObjectWithData.get(checkingStep).toString().equals("[]"))) {
+
+						jsonObjectWithData.remove(checkingStep);
 					}
 				}
 
-				Declaration declaration = mapper.readValue(json.toString(), Declaration.class);
-				declaration
-						.setRegionNameDeclarant(ruleFindRegisteredAddress.getDeclarantRegisteredAddress().getRegion());
-				declaration.setCityDeclarant(ruleFindRegisteredAddress.getDeclarantRegisteredAddress().getCity());
-				declaration.setCountryDeclarant(ruleFindRegisteredAddress.getDeclarantRegisteredAddress().getCountry());
-				declaration
-						.setDistrictDeclarant(ruleFindRegisteredAddress.getDeclarantRegisteredAddress().getDistrict());
-
-				collectionGetingDeclaration.add(declaration);
+				collectionGetingDeclaration
+						.add(addingInformationIntoDeclaration(mapper, json, ruleFindRegisteredAddress));
 			} catch (IOException | JSONException e) {
 				e.printStackTrace();
 			}
 
 		}
 
-		log.info(
-				"Size array with declaration :" + collectionGetingDeclaration.size() + "  from:" + collectionId.size());
-		long timeSpent = System.currentTimeMillis() - startTime;
-		log.info("Working parsing : " + timeSpent + " mls");
+		log.info(String.format("Size array with declaration :%d from %d", collectionGetingDeclaration.size(),
+				collectionId.size()));
 		return collectionGetingDeclaration;
 
 	}
 
-	private static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
-		InputStream is = new URL(url).openStream();
+	private Declaration addingInformationIntoDeclaration(ObjectMapper mapper, JSONObject json,
+			RuleFindRegisteredAddress ruleFindRegisteredAddress) {
 		try {
+			Declaration declaration = mapper.readValue(json.toString(), Declaration.class);
+
+			declaration.setRegionNameDeclarant(ruleFindRegisteredAddress.getDeclarantRegisteredAddress().getRegion());
+			declaration.setCityDeclarant(ruleFindRegisteredAddress.getDeclarantRegisteredAddress().getCity());
+			declaration.setCountryDeclarant(ruleFindRegisteredAddress.getDeclarantRegisteredAddress().getCountry());
+			declaration.setDistrictDeclarant(ruleFindRegisteredAddress.getDeclarantRegisteredAddress().getDistrict());
+
+			return declaration;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
+		try (InputStream is = new URL(url).openStream()) {
 			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 			String jsonText = readAll(rd);
 			JSONObject json = new JSONObject(jsonText);
 			return json;
-		} finally {
-			is.close();
 		}
 	}
 
-	private static String readAll(Reader rd) throws IOException {
+	private String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		int cp;
 		while ((cp = rd.read()) != -1) {
