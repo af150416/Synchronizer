@@ -12,6 +12,7 @@ import javax.persistence.Enumerated;
 public class PersonInfo {
 
 	private int id;
+	private Long subjectId;
 	private String country;
 	private String lastName;
 	private String firstName;
@@ -248,6 +249,14 @@ public class PersonInfo {
 
 	public void setFamilySubjectId(String familySubjectId) {
 		this.familySubjectId = familySubjectId;
+	}
+
+	public Long getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(Long subjectId) {
+		this.subjectId = subjectId;
 	}
 
 }

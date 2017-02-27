@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Repository;
 
 import com.softbistro.declarations.jparser.parsing.json.component.entity.CorporateLaw;
 import com.softbistro.declarations.jparser.parsing.json.component.entity.Declaration;
@@ -16,13 +17,19 @@ import com.softbistro.declarations.jparser.parsing.json.component.interfaces.ISh
 import com.softbistro.declarations.jparser.parsing.json.component.mysql.Shares;
 import com.softbistro.declarations.jparser.parsing.json.component.mysql.ShortRights;
 
+/**
+ * Dao for work with entity Shares
+ * @author cortes
+ *
+ */
+@Repository
 public class SharesDao implements IShares {
 
 	private IRights iRights;
 	private List<ShortRights> batchRights;
 
 	@Override
-	public List<Shares> getSecurities(Declaration declaration, Integer personId, Integer rightId) {
+	public List<Shares> getSecurities(Declaration declaration, Integer personId) {
 		iRights = new RightsDao();
 		List<Shares> batchSecurities = new ArrayList<>();
 		batchRights = new ArrayList<>();
@@ -35,7 +42,7 @@ public class SharesDao implements IShares {
 
 				for (Map.Entry<String, Rights> right : entry.getValue().getRights().entrySet()) {
 					Shares share = new Shares();
-					ShortRights rights = iRights.getRights(right, rightId);
+					ShortRights rights = iRights.getRights(right, personId);
 					batchRights.add(rights);
 
 					if (declaration.getDeclarantDatas().getSecurities() != null) {
@@ -45,7 +52,6 @@ public class SharesDao implements IShares {
 						share.setPerson(entry.getValue().getPerson());
 						share.setAmount(entry.getValue().getAmount());
 						share.setPersonId(Long.valueOf(personId));
-						share.setRightsId(rights.getPersonId());
 						share.setEmitent(entry.getValue().getEmitent());
 						share.setIteration(entry.getKey());
 						share.setOwningDate(entry.getValue().getOwningDate());
@@ -67,7 +73,7 @@ public class SharesDao implements IShares {
 	}
 
 	@Override
-	public List<Shares> getCorporateLaw(Declaration declaration, Integer personId, Integer rightId) {
+	public List<Shares> getCorporateLaw(Declaration declaration, Integer personId) {
 		iRights = new RightsDao();
 		List<Shares> batchCorporateLaw = new ArrayList<>();
 		batchRights = new ArrayList<>();
@@ -80,17 +86,18 @@ public class SharesDao implements IShares {
 
 				for (Map.Entry<String, Rights> right : entry.getValue().getRights().entrySet()) {
 					Shares corporateLaw = new Shares();
-					ShortRights rights = iRights.getRights(right, rightId);
+					ShortRights rights = iRights.getRights(right, personId);
 					batchRights.add(rights);
 
 					if (declaration.getDeclarantDatas().getCorporateLaw() != null) {
 						corporateLaw.setPersonId(Long.valueOf(personId));
 						corporateLaw.setCost(entry.getValue().getCost());
-						corporateLaw.setRightsId(rights.getPersonId());
 						corporateLaw.setName(entry.getValue().getName());
 						corporateLaw.setIteration(entry.getKey());
 						corporateLaw.setLegalForm(entry.getValue().getLegalForm());
-						corporateLaw.setCountry(entry.getValue().getCountry().toString());
+						if (entry.getValue().getCountry() != null) {
+							corporateLaw.setCountry(entry.getValue().getCountry().toString());
+						}
 						if (StringUtils.isNotBlank(entry.getValue().getCostPercent())) {
 							corporateLaw.setCostPercent(entry.getValue().getCostPercent());
 						}
@@ -105,7 +112,7 @@ public class SharesDao implements IShares {
 	}
 
 	@Override
-	public List<Shares> getRepicientPay(Declaration declaration, Integer personId, Integer rightId) {
+	public List<Shares> getRepicientPay(Declaration declaration, Integer personId) {
 		List<Shares> batchRecipientPay = new ArrayList<>();
 		if (declaration.getDeclarantDatas().getRecipientPay() == null) {
 			return batchRecipientPay;

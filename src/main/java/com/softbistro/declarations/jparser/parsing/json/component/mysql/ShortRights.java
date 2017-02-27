@@ -8,7 +8,8 @@ package com.softbistro.declarations.jparser.parsing.json.component.mysql;
  */
 public class ShortRights {
 
-	private int id;
+	private Integer id;
+	private String rightsId;
 	private String personId;
 	private String citizen;
 	private String country;
@@ -187,6 +188,14 @@ public class ShortRights {
 
 	public void setPercentOwnership(String percentOwnership) {
 		this.percentOwnership = percentOwnership;
+	}
+
+	public String getRightsId() {
+		return rightsId;
+	}
+
+	public void setRightsId(String rightsId) {
+		this.rightsId = rightsId;
 	}
 
 }

@@ -18,7 +18,7 @@ public class Costs {
 	private String specExpensesMovableSubject;
 	private String specExpensesOtherRealtySubject;
 	private String specExpensesOtherMovableSubject;
-	private int personId;
+	private Long personId;
 
 	public int getId() {
 		return id;
@@ -100,11 +100,11 @@ public class Costs {
 		this.specExpensesOtherMovableSubject = specExpensesOtherMovableSubject;
 	}
 
-	public int getPersonId() {
+	public Long getPersonId() {
 		return personId;
 	}
 
-	public void setPersonId(int personId) {
+	public void setPersonId(Long personId) {
 		this.personId = personId;
 	}
 

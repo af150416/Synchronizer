@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.softbistro.declarations.jparser.parsing.json.component.entity.CashAssets;
 import com.softbistro.declarations.jparser.parsing.json.component.entity.Declaration;
 import com.softbistro.declarations.jparser.parsing.json.component.entity.MoneyGifts;
@@ -12,14 +14,19 @@ import com.softbistro.declarations.jparser.parsing.json.component.interfaces.IIn
 import com.softbistro.declarations.jparser.parsing.json.component.interfaces.IRights;
 import com.softbistro.declarations.jparser.parsing.json.component.mysql.Income;
 import com.softbistro.declarations.jparser.parsing.json.component.mysql.ShortRights;
-
+/**
+ * Dao for work with entity Income
+ * @author cortes
+ *
+ */
+@Repository
 public class IncomeDao implements IIncome {
 
 	private IRights iRights;
 	private List<ShortRights> batchRights;
 
 	@Override
-	public List<Income> getIncomeGifts(Declaration declaration, Integer personId, Integer rightId) {
+	public List<Income> getIncomeGifts(Declaration declaration, Integer personId) {
 
 		iRights = new RightsDao();
 		List<Income> batchIncome = new ArrayList<>();
@@ -33,12 +40,11 @@ public class IncomeDao implements IIncome {
 
 				for (Map.Entry<String, Rights> right : entry.getValue().getRights().entrySet()) {
 					Income income = new Income();
-					ShortRights rights = iRights.getRights(right, rightId);
+					ShortRights rights = iRights.getRights(right, personId);
 					batchRights.add(rights);
 
-					if (declaration.getDeclarantDatas().getRealties() != null) {
+					if (declaration.getDeclarantDatas().getMoneyGifts() != null) {
 						income.setPersonId(Long.valueOf(personId));
-						income.setRightsId(rights.getPersonId());
 						income.setIteration(entry.getKey());
 						income.setObjectType(entry.getValue().getObjectType());
 						income.setIncomeSize(entry.getValue().getSizeIncome());
@@ -60,7 +66,7 @@ public class IncomeDao implements IIncome {
 	}
 
 	@Override
-	public List<Income> getIncomeCashAssets(Declaration declaration, Integer personId, Integer rightId) {
+	public List<Income> getIncomeCashAssets(Declaration declaration, Integer personId) {
 
 		iRights = new RightsDao();
 		List<Income> batchIncome = new ArrayList<>();
@@ -74,12 +80,11 @@ public class IncomeDao implements IIncome {
 
 				for (Map.Entry<String, Rights> right : entry.getValue().getRights().entrySet()) {
 					Income income = new Income();
-					ShortRights rights = iRights.getRights(right, rightId);
+					ShortRights rights = iRights.getRights(right, personId);
 					batchRights.add(rights);
 
-					if (declaration.getDeclarantDatas().getRealties() != null) {
+					if (declaration.getDeclarantDatas().getCashAssets() != null) {
 						income.setPersonId(Long.valueOf(personId));
-						income.setRightsId(rights.getPersonId());
 						income.setObjectType(entry.getValue().getObjectType());
 						income.setSizeAssets(entry.getValue().getSizeAssets());
 						income.setOrganization(entry.getValue().getOrganization());

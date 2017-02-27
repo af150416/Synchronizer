@@ -50,7 +50,8 @@ public class RuleFindRegisteredAddress implements IParsingRules {
 		} catch (ParsingException e) {
 
 			log.error(ERROR_MESSAGE + " " + e.getMessage());
-			throw new ParsingException(ERROR_MESSAGE + " " + e.getMessage());
+			//throw new ParsingException(ERROR_MESSAGE + " " + e.getMessage());
+			return new DeclarantRegisteredAddress(new ArrayList<String>());
 		}
 
 		String textInRegisterAddress = doc.select(path).text();

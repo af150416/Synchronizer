@@ -35,12 +35,14 @@ public class Movable {
 	@JsonProperty("costDate_extendedstatus")
 	private String costDateExtendedStatus;
 
-	public String getBarnd() {
+	
+
+	public String getBrand() {
 		return brand;
 	}
 
-	public void setBarnd(String barnd) {
-		this.brand = barnd;
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public String getModel() {

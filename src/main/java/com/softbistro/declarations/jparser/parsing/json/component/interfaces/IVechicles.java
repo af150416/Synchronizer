@@ -8,7 +8,7 @@ import com.softbistro.declarations.jparser.parsing.json.component.mysql.Vechicle
 
 public interface IVechicles {
 
-	public List<Vechicles> getVechicles(Declaration declaration, Integer personId, Integer rightId);
+	public List<Vechicles> getVechicles(Declaration declaration, Integer personId);
 
 	public List<ShortRights> getRights();
 }

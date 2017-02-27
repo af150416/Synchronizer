@@ -25,25 +25,52 @@ import com.softbistro.declarations.jparser.parsing.json.component.service.Parsin
 @ComponentScan(basePackages = "com.softbistro.declarations.jparser")
 public class JParserApplication {
 
+	
 	private static ParsingThreds parsingThreds;
+	
+	private static ApplicationContext context;
 
 	public static void main(String[] args)
 			throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
-		ApplicationContext context = SpringApplication.run(JParserApplication.class, args);
+		
+		context = SpringApplication.run(JParserApplication.class, args);
+		
 		runThreads();
+		
 	}
 
-	//@Scheduled(fixedDelay = 15000)
+	// @Scheduled(fixedDelay = 15000)
 	public static void runThreads() {
-		parsingThreds = new ParsingThreds();
+
+		/*ParsingThreds parsingThreds1 = context.getBean(ParsingThreds.class);		
+		parsingThreds1.start();
+
+		ParsingThreds parsingThreds2 = context.getBean(ParsingThreds.class);	
+		parsingThreds2.start();
+		
+		ParsingThreds parsingThreds3 = context.getBean(ParsingThreds.class);	
+		parsingThreds3.start();
+		
+		ParsingThreds parsingThreds4 = context.getBean(ParsingThreds.class);	
+		parsingThreds4.start();
+		
+		ParsingThreds parsingThreds5 = context.getBean(ParsingThreds.class);	
+		parsingThreds5.start();*/
+
+		parsingThreds = new ParsingThreds();		
 		parsingThreds.start();
 
-		parsingThreds = new ParsingThreds();
+		parsingThreds = new ParsingThreds();		
 		parsingThreds.start();
-
-		parsingThreds = new ParsingThreds();
+		
+		parsingThreds = new ParsingThreds();		
 		parsingThreds.start();
-
+		
+		parsingThreds = new ParsingThreds();		
+		parsingThreds.start();
+		
+		parsingThreds = new ParsingThreds();		
+		parsingThreds.start();
 	}
 
 }

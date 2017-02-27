@@ -8,8 +8,8 @@ import com.softbistro.declarations.jparser.parsing.json.component.mysql.ShortRig
 
 public interface IIncome {
 	
-	public List<Income> getIncomeGifts(Declaration declaration, Integer personId, Integer rightId);
-	public List<Income> getIncomeCashAssets(Declaration declaration, Integer personId, Integer rightId);
+	public List<Income> getIncomeGifts(Declaration declaration, Integer personId);
+	public List<Income> getIncomeCashAssets(Declaration declaration, Integer personId);
 	
 	public List<ShortRights> getRights();
 }

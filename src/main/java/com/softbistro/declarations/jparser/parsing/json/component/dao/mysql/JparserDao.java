@@ -23,7 +23,7 @@ import com.mysql.jdbc.Driver;
 @Component
 public class JparserDao {
 
-	private int countOfRecords = 5;
+	private int countOfRecords = 2000;
 	/**
 	 * Get 400 records from DB with Id Declarations
 	 */

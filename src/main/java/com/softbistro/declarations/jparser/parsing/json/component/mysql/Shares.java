@@ -14,7 +14,7 @@ public class Shares {
 	private String cost;
 	private Double amount;
 	private Long personId;
-	private String rightsId;
+	private Long rightsId;
 	private String emitent;
 	private String iteration;
 	private Date owningDate;
@@ -63,11 +63,11 @@ public class Shares {
 		this.personId = personId;
 	}
 
-	public String getRightsId() {
+	public Long getRightsId() {
 		return rightsId;
 	}
 
-	public void setRightsId(String rightsId) {
+	public void setRightsId(Long rightsId) {
 		this.rightsId = rightsId;
 	}
 

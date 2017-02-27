@@ -14,7 +14,7 @@ public class Vechicles {
 	private String brand;
 	private String model;
 	private Long personId;
-	private String rightsId;
+	private Long rightsId;
 	private Double costDate;
 	private String iteration;
 	private String objectType;
@@ -45,10 +45,10 @@ public class Vechicles {
 	public void setPersonId(Long personId) {
 		this.personId = personId;
 	}
-	public String getRightsId() {
+	public Long getRightsId() {
 		return rightsId;
 	}
-	public void setRightsId(String rightsId) {
+	public void setRightsId(Long rightsId) {
 		this.rightsId = rightsId;
 	}
 	public Double getCostDate() {

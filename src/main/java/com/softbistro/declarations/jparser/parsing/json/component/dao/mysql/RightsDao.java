@@ -7,13 +7,17 @@ import org.springframework.stereotype.Repository;
 import com.softbistro.declarations.jparser.parsing.json.component.entity.Rights;
 import com.softbistro.declarations.jparser.parsing.json.component.interfaces.IRights;
 import com.softbistro.declarations.jparser.parsing.json.component.mysql.ShortRights;
-
+/**
+ * Dao for work with entity Rights
+ * @author cortes
+ *
+ */
 @Repository
 public class RightsDao implements IRights {
 
 	@Override
 	public ShortRights getRights(Entry<String, Rights> right, Integer personId) {
-		
+
 		ShortRights rights = new ShortRights();
 		if (right.getKey().equals("1")) {
 			rights.setPersonId(personId + "");

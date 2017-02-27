@@ -8,7 +8,7 @@ import com.softbistro.declarations.jparser.parsing.json.component.mysql.ShortRig
 
 public interface IRealuty {
 	
-	public List<Realuty> getRealuty(Declaration declaration, Integer personId, Integer rightId);
+	public List<Realuty> getRealuty(Declaration declaration, Integer personId);
 	
 	public List<ShortRights> getRights();
 }

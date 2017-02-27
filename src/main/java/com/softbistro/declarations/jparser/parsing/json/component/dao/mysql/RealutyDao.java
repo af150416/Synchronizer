@@ -15,7 +15,11 @@ import com.softbistro.declarations.jparser.parsing.json.component.interfaces.IRe
 import com.softbistro.declarations.jparser.parsing.json.component.interfaces.IRights;
 import com.softbistro.declarations.jparser.parsing.json.component.mysql.Realuty;
 import com.softbistro.declarations.jparser.parsing.json.component.mysql.ShortRights;
-
+/**
+ * Dao for work with entity Realuty
+ * @author cortes
+ *
+ */
 @Repository
 public class RealutyDao implements IRealuty {
 
@@ -23,7 +27,7 @@ public class RealutyDao implements IRealuty {
 	private List<ShortRights> batchRights;
 
 	@Override
-	public List<Realuty> getRealuty(Declaration declaration, Integer personId, Integer rightId) {
+	public List<Realuty> getRealuty(Declaration declaration, Integer personId) {
 
 		iRights = new RightsDao();
 		List<Realuty> batchRealuty = new ArrayList<>();
@@ -37,12 +41,11 @@ public class RealutyDao implements IRealuty {
 
 				for (Map.Entry<String, Rights> right : entry.getValue().getRights().entrySet()) {
 					Realuty subjectRealuty = new Realuty();
-					ShortRights rights = iRights.getRights(right, rightId);
+					ShortRights rights = iRights.getRights(right, personId);
 					batchRights.add(rights);
 
 					if (declaration.getDeclarantDatas().getRealties() != null) {
 						subjectRealuty.setPersonId(Long.valueOf(personId));
-						subjectRealuty.setRightsId(rights.getPersonId());
 						if (StringUtils.isNotBlank(entry.getValue().getCost())) {
 							subjectRealuty.setCostDate(entry.getValue().getCost());
 						}

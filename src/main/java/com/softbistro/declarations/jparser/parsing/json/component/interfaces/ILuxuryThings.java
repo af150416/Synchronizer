@@ -8,7 +8,7 @@ import com.softbistro.declarations.jparser.parsing.json.component.mysql.ShortRig
 
 public interface ILuxuryThings {
 	
-	public List<LuxuryThings> getLuxuryThings(Declaration declaration, Integer personId, Integer rightId);
+	public List<LuxuryThings> getLuxuryThings(Declaration declaration, Integer personId);
 
 	public List<ShortRights> getRights();
 

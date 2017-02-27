@@ -8,11 +8,11 @@ import com.softbistro.declarations.jparser.parsing.json.component.mysql.ShortRig
 
 public interface IShares {
 	
-	public List<Shares> getSecurities(Declaration declaration, Integer personId, Integer rightId);
+	public List<Shares> getSecurities(Declaration declaration, Integer personId);
 	
-	public List<Shares> getCorporateLaw(Declaration declaration, Integer personId, Integer rightId);
+	public List<Shares> getCorporateLaw(Declaration declaration, Integer personId);
 	
-	public List<Shares> getRepicientPay(Declaration declaration, Integer personId, Integer rightId);
+	public List<Shares> getRepicientPay(Declaration declaration, Integer personId);
 	
 	public List<ShortRights> getRights();
 }

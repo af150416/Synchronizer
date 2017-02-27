@@ -12,7 +12,7 @@ public class Realuty {
 
 	private int id;
 	private Long personId;
-	private String rightsId;
+	private Long rightsId;
 	private String costDate;
 	private String iteration;
 	private String totalArea;
@@ -38,11 +38,11 @@ public class Realuty {
 		this.personId = personId;
 	}
 
-	public String getRightsId() {
+	public Long getRightsId() {
 		return rightsId;
 	}
 
-	public void setRightsId(String rightsId) {
+	public void setRightsId(Long rightsId) {
 		this.rightsId = rightsId;
 	}
 

@@ -10,7 +10,7 @@ public class Income {
 
 	private int id;
 	private Long personId;
-	private String rightsId;
+	private Long rightsId;
 	private String iteration;
 	private String objectType;
 	private Double incomeSize;
@@ -44,11 +44,11 @@ public class Income {
 		this.personId = personId;
 	}
 
-	public String getRightsId() {
+	public Long getRightsId() {
 		return rightsId;
 	}
 
-	public void setRightsId(String rightsId) {
+	public void setRightsId(Long rightsId) {
 		this.rightsId = rightsId;
 	}
 

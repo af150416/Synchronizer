@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.softbistro.declarations.jparser.parsing.json.component.entity.Declaration;
 import com.softbistro.declarations.jparser.parsing.json.component.entity.MoneyGifts;
 import com.softbistro.declarations.jparser.parsing.json.component.entity.Movable;
@@ -13,14 +15,19 @@ import com.softbistro.declarations.jparser.parsing.json.component.interfaces.IVe
 import com.softbistro.declarations.jparser.parsing.json.component.mysql.Income;
 import com.softbistro.declarations.jparser.parsing.json.component.mysql.ShortRights;
 import com.softbistro.declarations.jparser.parsing.json.component.mysql.Vechicles;
-
+/**
+ * Dao for work with entity Vechicles
+ * @author cortes
+ *
+ */
+@Repository
 public class VechiclesDao implements IVechicles {
 
 	private IRights iRights;
 	private List<ShortRights> batchRights;
 
 	@Override
-	public List<Vechicles> getVechicles(Declaration declaration, Integer personId, Integer rightId) {
+	public List<Vechicles> getVechicles(Declaration declaration, Integer personId) {
 
 		iRights = new RightsDao();
 		List<Vechicles> batchVechicles = new ArrayList<>();
@@ -34,15 +41,14 @@ public class VechiclesDao implements IVechicles {
 
 				for (Map.Entry<String, Rights> right : entry.getValue().getRights().entrySet()) {
 					Vechicles vechicle = new Vechicles();
-					ShortRights rights = iRights.getRights(right, rightId);
+					ShortRights rights = iRights.getRights(right, personId);
 					batchRights.add(rights);
 
 					if (declaration.getDeclarantDatas().getMovables() != null) {
 						vechicle.setPersonId(Long.valueOf(personId));
-						vechicle.setRightsId(rights.getPersonId());
 						vechicle.setIteration(entry.getKey());
 						vechicle.setObjectType(entry.getValue().getObjectType());
-						vechicle.setBrand(entry.getValue().getBarnd());
+						vechicle.setBrand(entry.getValue().getBrand());
 						vechicle.setModel(entry.getValue().getModel());
 						vechicle.setCostDate(entry.getValue().getCostDate());
 						vechicle.setGraduationYear(entry.getValue().getGraduationYear());
